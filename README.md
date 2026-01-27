@@ -158,7 +158,7 @@ portfolio-website/
    ```
 4. Navigate to `http://localhost:8000`
 
-## ⚡ Performance Tips
+## Performance Tips
 
 - Images are lazy-loaded
 - CSS animations use GPU acceleration
@@ -178,4 +178,3 @@ portfolio-website/
 
 ---
 
-**Built with 💚 by Ed Christie**
