@@ -2,7 +2,7 @@
 
 A modern, unique portfolio website showcasing skills, projects, and experience as an Applied Software Engineer.
 
-## 🌟 Features
+## Features
 
 - **Terminal-Style Hero Section** - Interactive typing animation with terminal window design
 - **Animated Profile Card** - Rotating gradient ring effect with status indicator
@@ -13,7 +13,7 @@ A modern, unique portfolio website showcasing skills, projects, and experience a
 - **Modern Glassmorphism UI** - Backdrop blur effects and gradient accents
 - **Easter Egg** - Konami code activation (try it!)
 
-## 🚀 Deployment to Cloudflare Pages
+## Deployment to Cloudflare Pages
 
 ### Option 1: Quick Deploy (Recommended)
 
@@ -74,7 +74,7 @@ If you want to use R2 bucket storage:
    - Enable public access
    - Connect custom domain `mredchristie.dev`
 
-## 📝 Customization Guide
+## Customization Guide
 
 ### 1. Replace Placeholder Information
 
@@ -118,7 +118,7 @@ The site automatically fetches your 6 most recently updated public repositories.
 - Edit `script.js` line 70 to change the number of repos
 - Modify line 75-76 to change filtering/sorting logic
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 portfolio-website/
@@ -129,7 +129,7 @@ portfolio-website/
 └── README.md          # This file
 ```
 
-## 🎨 Technologies Used
+## Technologies Used
 
 - **HTML5** - Semantic markup
 - **CSS3** - Custom properties, Grid, Flexbox, Animations
@@ -137,14 +137,14 @@ portfolio-website/
 - **GitHub API** - Dynamic project loading
 - **Google Fonts** - JetBrains Mono & Inter
 
-## 🌐 Browser Support
+## Browser Support
 
 - Chrome/Edge 90+
 - Firefox 88+
 - Safari 14+
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 🔧 Local Development
+## Local Development
 
 1. Clone the repository
 2. Open `index.html` in a browser
@@ -165,7 +165,7 @@ portfolio-website/
 - Minimal JavaScript dependencies
 - Optimized for Lighthouse scores
 
-## 🎯 Future Enhancements
+## Future Enhancements
 
 - [ ] Add dark/light theme toggle
 - [ ] Blog section integration
@@ -174,19 +174,7 @@ portfolio-website/
 - [ ] Resume download section
 - [ ] Analytics integration
 
-## 📄 License
 
-Feel free to use this template for your own portfolio. Attribution appreciated but not required!
-
-## 🤝 Contributing
-
-Found a bug or have a suggestion? Feel free to open an issue or submit a pull request.
-
-## 📧 Contact
-
-- Website: mredchristie.dev
-- LinkedIn: [Your LinkedIn URL]
-- GitHub: [Your GitHub URL]
 
 ---
 
