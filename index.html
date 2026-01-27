@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed Christie - Applied Software Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="terminal-prompt">mredchristie@dev:~$</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#interests" class="nav-link">Interests</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="snippets.html" class="nav-link">Snippets</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <div class="terminal-title">portfolio.sh</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="prompt">visitor@mredchristie.dev:~$</span>
+                        <span class="command">cat about.txt</span>
+                    </div>
+                    <div class="terminal-output">
+                        <p class="typing-text" id="typing-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="profile-card">
+                    <div class="profile-image-wrapper">
+                        <div class="profile-ring"></div>
+                        <img src="profile.jpg" alt="Ed Christie" class="profile-image" id="profile-img">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">
+                        <span class="title-number">0001.</span>
+                        About Me
+                    </h2>
+                    <h1 class="name-title">Ed Christie</h1>
+                    <p class="role">Applied Software Engineer | 3rd Year Student</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Age</span>
+                            <span class="info-value">21</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Cornwall & Cardiff, UK</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">University</span>
+                            <span class="info-value">Cardiff University</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span class="info-value">Seeking Opportunities</span>
+                        </div>
+                    </div>
+                    <p class="about-description">
+                        Third-year Applied Software Engineering student with a passion for building accessible, 
+                        user-centered applications. Experienced in full-stack development, CI/CD pipelines, and 
+                        modern web technologies. Currently developing innovative solutions with React Server Components, 
+                        PostgreSQL, and Docker while maintaining strong project management and team collaboration skills.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">0010.</span>
+                Technical Skills
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Python Flask</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Visual Basic</span>
+                        <span class="skill-tag">C#</span>
+                        
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">TypeORM</span>
+                        <span class="skill-tag">React Server Components</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
+                        </svg>
+                    </div>
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MariaDB</span>
+                        <span class="skill-tag">SQLite</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
+                    </div>
+                    <h3>Tools & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Podman</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">GitLab Runners</span>
+                        <span class="skill-tag">Git Workflows</span>
+                        <span class="skill-tag">Pre-commit Hooks</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <path d="M9 12h6"></path>
+                            <path d="M9 16h6"></path>
+                        </svg>
+                    </div>
+                    <h3>Project Management</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Sprint Planning</span>
+                        <span class="skill-tag">Daily Standups</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Trello</span>
+                        <span class="skill-tag">User Story Development</span>
+                        <span class="skill-tag">Backlog Refinement</span>
+                        <span class="skill-tag">Team Leadership</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path>
+                            <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
+                            <path d="M12 2v2"></path>
+                            <path d="M12 22v-2"></path>
+                            <path d="m17 20.66-1-1.73"></path>
+                            <path d="M11 10.27 7 3.34"></path>
+                            <path d="m20.66 17-1.73-1"></path>
+                            <path d="m3.34 7 1.73 1"></path>
+                            <path d="M14 12h8"></path>
+                            <path d="M2 12h2"></path>
+                            <path d="m20.66 7-1.73 1"></path>
+                            <path d="m3.34 17 1.73-1"></path>
+                            <path d="m17 3.34-1 1.73"></path>
+                            <path d="m11 13.73-4 6.93"></path>
+                        </svg>
+                    </div>
+                    <h3>Specializations</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Accessibility (WCAG 2.1)</span>
+                        <span class="skill-tag">Security</span>
+                        <span class="skill-tag">Client Focused Development</span>
+                        <span class="skill-tag">Agile Team Working</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Development Environment</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Vim/Neovim</span>
+                        <span class="skill-tag">IntelliJ IDEA</span>
+                        <span class="skill-tag">Git Version Control</span>
+                        <span class="skill-tag">Merge Conflict Resolution</span>
+                        <span class="skill-tag">Linux/Unix</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="interests">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">0011.</span>
+                Beyond The Code
+            </h2>
+            <p class="interests-intro">
+                When I'm not coding, I enjoy travelling and adventuring to unique places around the world...
+            </p>
+            
+            <div class="interests-carousel-wrapper">
+                <div class="interests-carousel">
+                    <div class="interest-card-small">
+                        <div class="interest-image-small">
+                            <img src="climbing.jpg" alt="Climbing and Bouldering">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Climbing</h3>
+                            <p>Problem-solving on the wall</p>
+                        </div>
+                    </div>
+
+                    <div class="interest-card-small">
+                        <div class="interest-image-small">
+                            <img src="skiing.jpg" alt="Skiing">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Skiing</h3>
+                            <p>Carving down mountains</p>
+                        </div>
+                    </div>
+
+                    <div class="interest-card-small">
+                        <div class="interest-image-small">
+                            <img src="watersports.jpg" alt="Swimming and Watersports">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Watersports</h3>
+                            <p>Ocean adventures & swimming</p>
+                        </div>
+                    </div>
+
+                    <div class="interest-card-small">
+                        <div class="interest-image-small">
+                            <img src="hiking.jpg" alt="Hiking">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Hiking</h3>
+                            <p>Exploring trails & peaks</p>
+                        </div>
+                    </div>
+
+                    <div class="interest-card-small">
+                        <div class="interest-image-small">
+                            <img src="camping.jpg" alt="Camping">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Camping</h3>
+                            <p>Under the stars</p>
+                        </div>
+                    </div>
+
+                    <div class="interest-card-small featured">
+                        <div class="interest-image-small">
+                            <img src="travel.jpg" alt="Kyrgyzstan Adventure">
+                        </div>
+                        <div class="interest-info">
+                            <h3>Remote Travel</h3>
+                            <p>Latest: Kyrgyzstan 🇰🇬</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                <span>Scroll to explore</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">0100.</span>
+                Featured Projects
+            </h2>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projects will be loaded from GitLab API -->
+                <div class="loading">Loading projects...</div>
+            </div>
+            <div class="github-link-wrapper">
+                <a href="https://git.cardiff.ac.uk/your-gitlab-username" target="_blank" class="github-profile-btn">
+                    <svg class="github-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L.395 10.93c-.526.529-.526 1.387 0 1.914l10.48 10.479c.604.604 1.582.604 2.186 0l10.48-10.48c.527-.527.527-1.385 0-1.913zM6.639 6.639l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36zm11.722 0l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36z"/>
+                    </svg>
+                    View All Projects on GitLab
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">0101.</span>
+                Get In Touch
+            </h2>
+            <div class="contact-content">
+                <p class="contact-text">
+                    I'm currently open to new opportunities and collaborations. Whether you have a question 
+                    or just want to say hi, feel free to reach out!
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:mredchristie@gmail.com" class="contact-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/ed-christie-77943b22b/" target="_blank" class="contact-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://git.cardiff.ac.uk/your-gitlab-username" target="_blank" class="contact-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L.395 10.93c-.526.529-.526 1.387 0 1.914l10.48 10.479c.604.604 1.582.604 2.186 0l10.48-10.48c.527-.527.527-1.385 0-1.913zM6.639 6.639l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36zm11.722 0l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36z"/>
+                        </svg>
+                        GitLab
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Designed & Built by Ed Christie</p>
+                <p class="footer-tech">Built with HTML, CSS, and vanilla JavaScript • Hosted on Cloudflare</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://git.cardiff.ac.uk/your-gitlab-username" target="_blank" aria-label="GitLab">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L.395 10.93c-.526.529-.526 1.387 0 1.914l10.48 10.479c.604.604 1.582.604 2.186 0l10.48-10.48c.527-.527.527-1.385 0-1.913zM6.639 6.639l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36zm11.722 0l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ed-christie-77943b22b/" target="_blank" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
