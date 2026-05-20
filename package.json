@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,html,css,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.2.4"
+  }
+}

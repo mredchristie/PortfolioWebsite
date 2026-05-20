@@ -18,6 +18,7 @@ A modern, unique portfolio website showcasing skills, projects, and experience a
 ### Option 1: Quick Deploy (Recommended)
 
 1. **Push to GitHub**
+
    ```bash
    git init
    git add .
@@ -48,18 +49,20 @@ A modern, unique portfolio website showcasing skills, projects, and experience a
 If you want to use R2 bucket storage:
 
 1. **Create R2 Bucket**
+
    ```bash
    # Install Wrangler CLI
    npm install -g wrangler
-   
+
    # Login to Cloudflare
    wrangler login
-   
+
    # Create bucket
    wrangler r2 bucket create portfolio-website
    ```
 
 2. **Upload Files**
+
    ```bash
    # Upload all files to R2
    wrangler r2 object put portfolio-website/index.html --file=index.html
@@ -79,12 +82,14 @@ If you want to use R2 bucket storage:
 ### 1. Replace Placeholder Information
 
 **In `index.html`:**
+
 - Line 78-85: Update personal information (age, location, university, status)
 - Line 87-92: Modify the about description
 - Line 238-260: Update contact links (email, LinkedIn, GitHub)
 - Add your profile picture as `profile.jpg` in the same directory
 
 **In `script.js`:**
+
 - Line 2: Update the terminal typing text with your own introduction
 - Line 67: Replace `'yourusername'` with your actual GitHub username
 - Line 256-257: Update GitHub profile URL in console message
@@ -92,6 +97,7 @@ If you want to use R2 bucket storage:
 ### 2. Add Your Profile Picture
 
 Replace the `profile.jpg` placeholder with your actual photo:
+
 - Recommended size: 600x600px minimum
 - Format: JPG, PNG, or WebP
 - Name it `profile.jpg` or update the src in `index.html` line 54
@@ -99,12 +105,13 @@ Replace the `profile.jpg` placeholder with your actual photo:
 ### 3. Customize Colors
 
 Edit CSS variables in `styles.css` (lines 1-11):
+
 ```css
 :root {
-    --primary: #00ff88;        /* Main accent color */
-    --secondary: #0099ff;      /* Secondary accent */
-    --bg-dark: #0a0e27;       /* Dark background */
-    --bg-darker: #050816;     /* Darker background */
+  --primary: #00ff88; /* Main accent color */
+  --secondary: #0099ff; /* Secondary accent */
+  --bg-dark: #0a0e27; /* Dark background */
+  --bg-darker: #050816; /* Darker background */
 }
 ```
 
@@ -115,6 +122,7 @@ In `index.html`, section starting at line 103, modify skill categories and tags 
 ### 5. Configure GitHub Integration
 
 The site automatically fetches your 6 most recently updated public repositories. To customize:
+
 - Edit `script.js` line 70 to change the number of repos
 - Modify line 75-76 to change filtering/sorting logic
 
@@ -149,13 +157,15 @@ portfolio-website/
 1. Clone the repository
 2. Open `index.html` in a browser
 3. Or use a local server:
+
    ```bash
    # Python
    python -m http.server 8000
-   
+
    # Node.js
    npx http-server
    ```
+
 4. Navigate to `http://localhost:8000`
 
 ## ⚡ Performance Tips
