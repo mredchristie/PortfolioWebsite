@@ -1,0 +1,294 @@
+/* ── Travel Gallery Page ───────────────────────────────────────────── */
+
+/* Active nav link */
+.nav-link.active {
+  color: var(--primary);
+}
+.nav-link.active::before {
+  width: 100%;
+}
+
+/* Hero */
+.travel-hero {
+  padding: 8rem 0 2rem;
+}
+
+.travel-hero-terminal {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(10, 14, 39, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.08);
+  overflow: hidden;
+}
+
+.travel-hero-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.travel-hero-sub {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Filter bar */
+.filter-section {
+  padding: 2.5rem 0 1rem;
+}
+
+.filter-section .container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.filter-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.filter-btn.active {
+  background: rgba(0, 255, 136, 0.12);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.photo-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Gallery */
+.gallery-section {
+  padding: 1.5rem 0 6rem;
+}
+
+.gallery-grid {
+  columns: 3 320px;
+  column-gap: 1.2rem;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.gallery-item:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.2);
+  transform: translateY(-4px);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Zoom icon overlay */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 136, 0.06);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* Filtered-out items */
+.gallery-item.hidden {
+  display: none;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 22, 0.96);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-caption {
+  margin-top: 1.2rem;
+  text-align: center;
+  max-width: 600px;
+}
+
+.lightbox-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  transition: var(--transition);
+}
+
+.lightbox-close:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10, 14, 39, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.6rem;
+  display: flex;
+  transition: var(--transition);
+}
+
+.lightbox-prev {
+  left: 1.2rem;
+}
+.lightbox-next {
+  right: 1.2rem;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: rgba(0, 255, 136, 0.08);
+}
+
+/* Light theme overrides */
+[data-theme='light'] .travel-hero-terminal {
+  background: rgba(220, 213, 204, 0.8);
+}
+
+[data-theme='light'] .filter-btn {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='light'] .lightbox {
+  background: rgba(235, 230, 224, 0.97);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .travel-hero {
+    padding: 6rem 0 1.5rem;
+  }
+
+  .travel-hero-title {
+    font-size: 1.7rem;
+  }
+
+  .gallery-grid {
+    columns: 1;
+  }
+
+  .filter-section .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .lightbox-prev {
+    left: 0.4rem;
+  }
+  .lightbox-next {
+    right: 0.4rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .gallery-grid {
+    columns: 2 280px;
+  }
+}

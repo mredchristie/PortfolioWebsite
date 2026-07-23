@@ -7,8 +7,8 @@
       document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
     </script>
     <title>Current Projects - Ed Christie</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="projects-styles.css" />
+    <link rel="stylesheet" href="styles.css?v=202607190708" />
+    <link rel="stylesheet" href="projects-styles.css?v=202607190708" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -48,6 +48,8 @@
           <li><a href="index.html#projects" class="nav-link">Projects</a></li>
           <li><a href="index.html#contact" class="nav-link">Contact</a></li>
           <li><a href="snippets.html" class="nav-link">Snippets</a></li>
+          <li><a href="travel.html" class="nav-link">Travel</a></li>
+          <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
           <li>
             <a
               href="https://status.mredchristie.dev/status/main"
@@ -259,17 +261,17 @@
 
           <div class="project-actions">
             <a
-              href="https://git.cardiff.ac.uk/c23041974/secure-package-registry"
+              href="https://github.com/mredchristie/secure-package-registry"
               target="_blank"
               rel="noopener noreferrer"
               class="project-btn primary"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path
-                  d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L.395 10.93c-.526.529-.526 1.387 0 1.914l10.48 10.479c.604.604 1.582.604 2.186 0l10.48-10.48c.527-.527.527-1.385 0-1.913zM6.639 6.639l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36zm11.722 0l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36z"
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
                 />
               </svg>
-              View on GitLab
+              View on GitHub
             </a>
             <a
               href="https://home.spr.mredchristie.dev"
@@ -355,6 +357,13 @@
                 >FX rate refresh via Frankfurter API; skin images via ByMykel community API</span
               >
             </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Companion desktop app in progress (Tauri: Rust + SvelteKit) reusing the same API to
+                value Steam inventories</span
+              >
+            </div>
           </div>
 
           <div class="project-tech">
@@ -369,6 +378,175 @@
           <div class="project-actions" style="margin-top: 1.5rem">
             <a
               href="https://cs2price.mredchristie.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn secondary"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              Live Site
+            </a>
+          </div>
+        </div>
+
+        <!-- UK Weather Consensus Card -->
+        <div class="upcoming-card">
+          <div class="featured-project-header">
+            <div class="project-status-badge">
+              <span class="status-dot-live"></span>
+              Live
+            </div>
+            <span class="project-date">June 2026 – Present</span>
+          </div>
+
+          <h3>UK Weather Consensus</h3>
+          <p>
+            A forecast engine that doesn't just blend the world's leading weather models - it scores
+            them. Stored forecasts from six models are checked against what actually happened at
+            your nearest weather station, and the forecast then follows whichever model has been
+            most accurate for each variable at that location.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Pulls UKMO (2 km), ECMWF, GFS, ICON and Météo-France via Open-Meteo, plus MET
+                Norway as an independent source, storing every hourly series in SQLite on a rolling
+                30-day window</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Scores each model's recent error per variable and location against METAR
+                observations and Environment Agency rain gauges, then follows the best model per
+                variable instead of diluting it in an average</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Honest confidence chips driven by the best model's measured recent error, with live
+                readings from the nearest station shown beside the forecast</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Click any hour for a model-by-model breakdown showing exactly where the models
+                agree and disagree</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Postcode and town typeahead via postcodes.io, with NASA EONET natural events
+                overlaid within 500 km</span
+              >
+            </div>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">SQLite</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">nginx</span>
+          </div>
+
+          <div class="project-actions" style="margin-top: 1.5rem">
+            <a
+              href="https://weather.mredchristie.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn secondary"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              Live Site
+            </a>
+          </div>
+        </div>
+
+        <!-- UK Surf Forecast Card -->
+        <div class="upcoming-card">
+          <div class="featured-project-header">
+            <div class="project-status-badge">
+              <span class="status-dot-live"></span>
+              Live
+            </div>
+            <span class="project-date">June 2026 – Present</span>
+          </div>
+
+          <h3>UK Surf Forecast</h3>
+          <p>
+            A companion to the weather app for UK surf breaks. Raw marine data means little on its
+            own, so each break's orientation is used to turn swell and wind into the answer surfers
+            actually want: is it working?
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Swell height, period and direction from Open-Meteo's Marine API, alongside combined
+                sea state, sea surface temperature and land wind</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Classifies wind as offshore, cross-shore or onshore for each of 15 named UK breaks
+                using the beach's facing direction</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">▸</span>
+              <span
+                >Computes swell exposure (how square-on the swell arrives) and derives an hourly 1–5
+                star rating from height, period, exposure and wind quality</span
+              >
+            </div>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Docker</span>
+          </div>
+
+          <div class="project-actions" style="margin-top: 1.5rem">
+            <a
+              href="https://surf.mredchristie.dev"
               target="_blank"
               rel="noopener noreferrer"
               class="project-btn secondary"
@@ -428,14 +606,14 @@
         </div>
         <div class="footer-links">
           <a
-            href="https://git.cardiff.ac.uk/c22067305"
+            href="https://github.com/mredchristie"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitLab (opens in new tab)"
+            aria-label="GitHub (opens in new tab)"
           >
             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path
-                d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L.395 10.93c-.526.529-.526 1.387 0 1.914l10.48 10.479c.604.604 1.582.604 2.186 0l10.48-10.48c.527-.527.527-1.385 0-1.913zM6.639 6.639l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36zm11.722 0l5.36 5.36-5.36 5.36-5.36-5.36 5.36-5.36z"
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
               />
             </svg>
           </a>
@@ -455,6 +633,6 @@
       </div>
     </footer>
 
-    <script src="projects-script.js"></script>
+    <script src="projects-script.js?v=202607190708"></script>
   </body>
 </html>

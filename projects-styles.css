@@ -347,6 +347,13 @@
   box-shadow: 0 10px 30px rgba(0, 153, 255, 0.2);
 }
 
+/* Breathing room between stacked cards */
+.featured-project-card + .upcoming-card,
+.section-divider + .upcoming-card,
+.upcoming-card + .upcoming-card {
+  margin-top: 2rem;
+}
+
 .upcoming-badge {
   display: inline-block;
   padding: 0.35rem 0.9rem;
@@ -402,9 +409,10 @@
   transform: scale(1) translateY(0);
 }
 
+/* Cards alternate: odd slide in from the left, even from the right */
 .upcoming-card {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateX(-70px);
   transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
@@ -412,16 +420,29 @@
     box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.upcoming-card:nth-child(1) {
-  transition-delay: 0.15s;
+.upcoming-card:nth-of-type(even) {
+  transform: translateX(70px);
 }
-.upcoming-card:nth-child(2) {
+
+.upcoming-card:nth-of-type(2) {
+  transition-delay: 0.1s;
+}
+.upcoming-card:nth-of-type(3) {
+  transition-delay: 0.2s;
+}
+.upcoming-card:nth-of-type(4) {
   transition-delay: 0.3s;
+}
+.upcoming-card:nth-of-type(5) {
+  transition-delay: 0.4s;
+}
+.upcoming-card:nth-of-type(6) {
+  transition-delay: 0.5s;
 }
 
 .projects-section.in-view .upcoming-card {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0, 0);
 }
 
 /* ============================================
@@ -495,9 +516,11 @@
     grid-template-columns: 1fr;
   }
 
-  /* Disable scroll animations on mobile */
+  /* Disable scroll animations on mobile. The nth-of-type selector must be
+     repeated here so this override outweighs the alternating slide rule. */
   .featured-project-card,
-  .upcoming-card {
+  .upcoming-card,
+  .upcoming-card:nth-of-type(even) {
     opacity: 1;
     transform: none;
   }

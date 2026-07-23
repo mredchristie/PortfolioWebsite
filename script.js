@@ -1,6 +1,6 @@
 // Terminal typing animation
 const text =
-  "Hello! I'm Ed Christie, a passionate Applied Software Engineering student specializing in full-stack development, accessible design, and modern web technologies. Currently building innovative solutions with React, PostgreSQL, and Docker while pursuing excellence in software engineering at Cardiff University.";
+  "Hello! I'm Ed Christie, an Applied Software Engineering graduate from Cardiff University (2:1 Honours), specializing in full-stack development, accessible design, and modern web technologies. Currently building innovative solutions with React, PostgreSQL, and Docker...";
 let index = 0;
 const typingElement = document.getElementById('typing-text');
 const typingSpeed = 10;
@@ -72,7 +72,9 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 // Intersection Observer for scroll animations
 const observerOptions = {
-  threshold: 0.1,
+  // Low threshold: tall sections (projects is ~7000px on mobile) can never
+  // reach a 10% visible fraction on a phone screen, which left them hidden.
+  threshold: 0.02,
   rootMargin: '0px 0px -100px 0px',
 };
 
@@ -172,23 +174,53 @@ animateParticles();
 
 */
 
-// Update profile image fallback
-const profileImg = document.getElementById('profile-img');
-profileImg.addEventListener('error', function () {
-  // If profile image fails to load, use a gradient placeholder
-  this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-  this.style.display = 'flex';
-  this.style.alignItems = 'center';
-  this.style.justifyContent = 'center';
-  this.innerHTML = '<span style="font-size: 80px; color: white;">EC</span>';
-});
+// Unmask transition: helmet shot cross-dissolves into the bare-face shot.
+//  - Desktop: scroll-scrubbed while the photo panel is pinned to the viewport.
+//  - Mobile: sticky scrubbing is unreliable, so instead auto-play the dissolve
+//    once the section scrolls into view (CSS handles the timing).
+(function () {
+  const track = document.getElementById('reveal-track');
+  const stage = document.getElementById('reveal-stage');
+  if (!track || !stage) return;
+
+  const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const rect = track.getBoundingClientRect();
+    const scrubDistance = rect.height - window.innerHeight;
+    if (scrubDistance <= 0) {
+      stage.style.setProperty('--reveal', '1');
+      return;
+    }
+    const raw = clamp(-rect.top / scrubDistance);
+    // Hold the helmet for the first 22%, run the morph across the middle ~56%,
+    // then hold the face for the last 22% — makes the change clearly begin,
+    // transition, and settle instead of blending the entire scroll.
+    const morph = clamp((raw - 0.22) / 0.56);
+    // Smoothstep easing so the morph eases in and out rather than being linear.
+    const eased = morph * morph * (3 - 2 * morph);
+    stage.style.setProperty('--reveal', eased.toFixed(4));
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
 
 // This creates smooth, directional animations that trigger when scrolling
 
 (function () {
   // Configuration
   const config = {
-    threshold: 0.15, // How much of element must be visible (15%)
+    threshold: 0.02, // Tiny fraction so very tall sections still trigger on phones
     rootMargin: '0px 0px -100px 0px', // Trigger before element fully in view
     triggerOnce: false, // Animation repeats on scroll
   };

@@ -47,16 +47,15 @@ const projectsScrollObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.1,
+    threshold: 0.02,
     rootMargin: '0px 0px -100px 0px',
   }
 );
 
-// Observe the projects section
-const projectsSection = document.querySelector('.projects-section');
-if (projectsSection) {
-  projectsScrollObserver.observe(projectsSection);
-}
+// Observe every projects section (pages can have more than one)
+document.querySelectorAll('.projects-section').forEach((section) => {
+  projectsScrollObserver.observe(section);
+});
 
 // Initialize
 updateScrollProgress();

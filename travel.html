@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
+    <title>Travel Gallery - Ed Christie</title>
+
+    <meta
+      name="description"
+      content="Travel photos from Ed Christie — adventures across China, Kyrgyzstan and beyond."
+    />
+    <meta name="author" content="Ed Christie" />
+
+    <link rel="stylesheet" href="styles.css?v=202607190708" />
+    <link rel="stylesheet" href="travel-styles.css?v=202607190708" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='60' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='%2300ff88' stroke='%230a0e27' stroke-width='3' font-family='monospace' font-weight='bold'>EC</text></svg>"
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html" style="text-decoration: none; color: inherit">
+            <span class="terminal-prompt">mredchristie&#64;dev:~$</span>
+          </a>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="index.html#interests" class="nav-link">Interests</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+          <li><a href="snippets.html" class="nav-link">Snippets</a></li>
+          <li><a href="travel.html" class="nav-link active">Travel</a></li>
+          <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+          <li>
+            <a
+              href="https://status.mredchristie.dev/status/main"
+              class="nav-status-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                aria-hidden="true"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              Server Status<span class="sr-only"> (opens in new tab)</span>
+            </a>
+          </li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg
+            class="theme-icon theme-icon-sun"
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg
+            class="theme-icon theme-icon-moon"
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="main-content" class="travel-hero">
+      <div class="container">
+        <div class="travel-hero-terminal">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="btn-close"></span>
+              <span class="btn-minimize"></span>
+              <span class="btn-maximize"></span>
+            </div>
+            <div class="terminal-title">gallery.sh</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="prompt">visitor&#64;mredchristie.dev:~$</span>
+              <span class="command">ls -la ~/travel/photos/</span>
+            </div>
+            <div class="terminal-output">
+              <p class="travel-hero-title">Travel Gallery</p>
+              <p class="travel-hero-sub">
+                Adventures across China, Kyrgyzstan and remote corners of the world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-bar" role="group" aria-label="Filter photos by region">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="china">China</button>
+          <button class="filter-btn" data-filter="central-asia">Central Asia</button>
+          <button class="filter-btn" data-filter="europe">Europe</button>
+          <button class="filter-btn" data-filter="mountains">Mountains</button>
+          <button class="filter-btn" data-filter="ocean">Ocean</button>
+        </div>
+        <p class="photo-count" aria-live="polite"><span id="visible-count">0</span> photos</p>
+      </div>
+    </section>
+
+    <!-- Gallery grid -->
+    <main class="gallery-section">
+      <div class="container">
+        <div class="gallery-grid" id="gallery-grid">
+          <!--
+            To add a photo: copy one <figure> block, set the img src and a short
+            alt description, and pick a data-category that matches a filter button
+            (china | central-asia | europe | mountains | ocean).
+          -->
+
+          <!-- ── China ───────────────────────────────────────────────── -->
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/20260524-201555243.jpg"
+              alt="Wearing traditional Hanfu robes at Beihai Park canal, Beijing"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_0543.jpg"
+              alt="Playing cards with locals at a street table"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3487.jpg"
+              alt="Bowl of braised beef noodles with chopsticks"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3720.jpg"
+              alt="Narrow city street lined with residential buildings and modern towers beyond"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3830.jpg"
+              alt="Looking straight up between Chongqing skyscrapers"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4025.jpg"
+              alt="Cat stretched out sleeping on a bench at an outdoor café"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4029.jpg"
+              alt="Busy waterfront promenade at golden hour with colourful signs"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4064.jpg"
+              alt="Drone light show forming a dragon shape in the night sky"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4287.jpg"
+              alt="Standing at the edge of a forested karst gorge at Wulong"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4330.jpg"
+              alt="View from inside a massive cave sinkhole looking up at a jagged sky opening"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4389.jpg"
+              alt="Cobblestone street with traditional wooden shop fronts"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4422.jpg"
+              alt="Illuminated waterfall and rocky cliffs at Furong Ancient Town at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4432.jpg"
+              alt="Fluffy white dog looking up at camera from below"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4439.jpg"
+              alt="Traditional Tujia buildings on a cliff face illuminated at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/566A89B8-B053-4D1B-BAE5-375A66CE26E9.jpg"
+              alt="Crowd gathered around a street card game"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0017.jpg"
+              alt="Shopping mall escalators beside a metro platform"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0030.jpg"
+              alt="Working on a laptop by a high-rise window"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0075.jpg"
+              alt="Walking a fairy-lit rope bridge through the trees"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0107.jpg"
+              alt="City skyline lit up at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0265.jpg"
+              alt="Friend chatting at an outdoor spot at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0571.jpg"
+              alt="Couple sitting by a window at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0884.jpg"
+              alt="Ornate street lamps lining a boulevard at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0939.jpg"
+              alt="Walking down a leafy old alleyway"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF0964.jpg"
+              alt="Visitor photographing a busy temple street"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1087.jpg"
+              alt="Waterfall tumbling beside lush foliage"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1123.jpg"
+              alt="Posing in front of forested karst cliffs"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1131.jpg"
+              alt="Sitting on a railing before a canyon waterfall"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1132.jpg"
+              alt="On a stone path through a steep gorge"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1373.jpg"
+              alt="Inside a dimly lit market stall"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1470.jpg"
+              alt="Red flags along a riverside on a rainy day"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1761.jpg"
+              alt="Harbour and city lights seen from a hilltop at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1775.jpg"
+              alt="Sprawling city skyline at night from a viewpoint"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1860.jpg"
+              alt="Getting ready in a dim hotel room"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/DSCF1941.jpg"
+              alt="Empty shuttered market corridor at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3505.jpg"
+              alt="Three friends in traditional Hanfu by a lake"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3833.jpg"
+              alt="Cable-stayed bridge over a river on a grey day"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3846.jpg"
+              alt="Monorail weaving between apartment towers"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_3954.jpg"
+              alt="Selfie in front of an illuminated bridge at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4013.jpg"
+              alt="River and skyline framed by trees at golden hour"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4137.jpg"
+              alt="Open-air night performance under spotlights"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/IMG_4659.jpg"
+              alt="In-flight map screen showing the route to China"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030041.JPG"
+              alt="Riding through the city beneath an overpass"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030077.JPG"
+              alt="Sitting roadside watching traffic go by"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030110.JPG"
+              alt="Browsing stalls at an antiques market"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030200.JPG"
+              alt="Friends messing around in Hanfu by a lake"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030203.JPG"
+              alt="Group portrait in traditional Hanfu"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030270.JPG"
+              alt="Posing by an engraved stone on the Great Wall"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030330.JPG"
+              alt="Traveller with luggage in a metro station"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030377.JPG"
+              alt="Man cooking on a wire-caged balcony"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030388.JPG"
+              alt="Small dog wandering a pet-shop arcade"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030411.JPG"
+              alt="Workers sheltering under a parasol amid scaffolding"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030450.JPG"
+              alt="Relaxing in a train cabin watching the view"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030468.JPG"
+              alt="Counter of a small noodle eatery"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030517.JPG"
+              alt="Craftsman at work in a cluttered workshop"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030646.JPG"
+              alt="Busy lantern-lit street at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030835.JPG"
+              alt="Boat crew member at night on the water"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1030901.JPG"
+              alt="Portrait on a red-lit festival street"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040183.JPG"
+              alt="City skyline at dusk with light projections"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040439.JPG"
+              alt="Temple rooftops nestled in a green gorge"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040447.JPG"
+              alt="Standing before a gorge with temple buildings"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040757.JPG"
+              alt="Outside a 7-Eleven on a city street"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040804.JPG"
+              alt="On the metro beneath a colourful advert"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="china">
+            <img
+              src="photos/china/P1040828.JPG"
+              alt="Crossing a rainy neon-lit street at night"
+              loading="lazy"
+            />
+          </figure>
+
+          <!-- ── Other destinations ──────────────────────────────────── -->
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img src="travel.jpg" alt="Remote mountain landscape in Kyrgyzstan" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03729.jpg"
+              alt="Backpackers in a Kyrgyz town with mountains behind"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03770.jpg"
+              alt="Hiking along an open road at dusk in Kyrgyzstan"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03804.jpg"
+              alt="Horses resting under trees in a Kyrgyz valley"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03863.jpg"
+              alt="Standing beside a yurt in the Kyrgyz highlands"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03974.jpg"
+              alt="Hikers on a ridge overlooking Kyrgyz mountains"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC03991.jpg"
+              alt="Two hikers at a summit in Kyrgyzstan"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04045.jpg"
+              alt="Riders on horseback crossing the steppe toward yurts"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04103.jpg"
+              alt="Yurt camp on the high plains of Kyrgyzstan"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04326.jpg"
+              alt="Backpackers heading up a forested mountain valley"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04339.jpg"
+              alt="Trekking through a wide green Kyrgyz valley"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04359.jpg"
+              alt="Quiet dirt street in a rural Kyrgyz village"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/DSC04386.jpg"
+              alt="Group at a yurt with performers in traditional dress"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/IMG_2762.JPG"
+              alt="With a local child outside a mountain house in Kyrgyzstan"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/IMG_6005.jpg"
+              alt="Sunset over a grand plaza in Bishkek"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="central-asia">
+            <img
+              src="photos/kyrgyzstan/P1000562.JPG"
+              alt="Golden evening light over the Kyrgyz mountains"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img src="skiing.jpg" alt="Skiing on a mountain slope" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img
+              src="photos/skiing/10060.jpg"
+              alt="Ski selfie in a snowstorm on the mountain"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img
+              src="photos/skiing/193411c0-1e14-437a-8cc0-a8dfa5ab6b8d.jpg"
+              alt="Skier on a piste above an alpine valley"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img src="photos/skiing/4627.jpg" alt="Skiing down a tree-lined slope" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img
+              src="photos/skiing/9022.jpg"
+              alt="Two skiers in goggles during a snowfall"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img
+              src="photos/skiing/efc53cb3-b61b-4322-ac8e-5ac055b975a7.jpg"
+              alt="Skier pausing on a piste below snowy peaks"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img src="hiking.jpg" alt="Hiking through mountain scenery" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="ocean">
+            <img src="watersports.jpg" alt="Rocky coastline at sunset" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img src="climbing.jpg" alt="Indoor bouldering wall" loading="lazy" />
+          </figure>
+
+          <figure class="gallery-item" data-category="mountains">
+            <img src="camping.jpg" alt="Wild camping in the outdoors" loading="lazy" />
+          </figure>
+        </div>
+
+        <p class="no-results" id="no-results" hidden>
+          No photos in this category yet — check back soon.
+        </p>
+      </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo viewer"
+      hidden
+    >
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close photo viewer">
+        <svg
+          aria-hidden="true"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous photo">
+        <svg
+          aria-hidden="true"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <div class="lightbox-content">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+        <div class="lightbox-caption">
+          <p class="lightbox-counter" id="lightbox-counter"></p>
+        </div>
+      </div>
+      <button class="lightbox-next" id="lightbox-next" aria-label="Next photo">
+        <svg
+          aria-hidden="true"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <p>Designed & Built by Ed Christie</p>
+          <p class="footer-tech">
+            Built with HTML, CSS, and vanilla JavaScript - Hosted on Cloudflare
+          </p>
+        </div>
+        <div class="footer-links">
+          <a
+            href="https://github.com/mredchristie"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub (opens in new tab)"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ed-christie-77943b22b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn (opens in new tab)"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="travel-script.js?v=202607190708"></script>
+  </body>
+</html>
