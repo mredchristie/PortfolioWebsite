@@ -57,5 +57,16 @@ document.querySelectorAll('.projects-section').forEach((section) => {
   projectsScrollObserver.observe(section);
 });
 
+// Portalguard demo: the real terminal recording, not a static transcript
+const pgPlayerEl = document.getElementById('pg-demo-player');
+if (pgPlayerEl && window.AsciinemaPlayer) {
+  AsciinemaPlayer.create('static/portalguard-demo.cast', pgPlayerEl, {
+    autoPlay: false,
+    preload: true,
+    loop: true,
+    fit: false,
+  });
+}
+
 // Initialize
 updateScrollProgress();

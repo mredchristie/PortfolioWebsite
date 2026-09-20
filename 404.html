@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
+    <title>404 Not Found - Ed Christie</title>
+    <meta name="description" content="That page doesn't exist on mredchristie.dev." />
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="styles.css?v=202609201407" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='60' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='%2300ff88' stroke='%230a0e27' stroke-width='3' font-family='monospace' font-weight='bold'>EC</text></svg>"
+    />
+    <style>
+      .error-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .error-terminal {
+        width: 100%;
+        max-width: 640px;
+      }
+      .error-code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: clamp(4rem, 18vw, 8rem);
+        font-weight: 700;
+        line-height: 1;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+      .error-message {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+      .error-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="error-page">
+      <div class="error-terminal">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="btn-close"></span>
+              <span class="btn-minimize"></span>
+              <span class="btn-maximize"></span>
+            </div>
+            <div class="terminal-title">404.sh</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="prompt">visitor&#64;mredchristie.dev:~$</span>
+              <span class="command">cd <span id="requested-path">/that-page</span></span>
+            </div>
+            <div class="terminal-output">
+              <p class="error-code">404</p>
+              <p class="error-message">
+                bash: cd: no such file or directory. That page doesn't exist here. It may have been
+                moved or renamed. Try one of these instead:
+              </p>
+              <div class="error-links">
+                <a href="/" class="contact-btn">Home</a>
+                <a href="/projects.html" class="contact-btn">Projects</a>
+                <a href="/infrastructure.html" class="contact-btn">Infrastructure</a>
+                <a href="/travel.html" class="contact-btn">Travel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      // Echo the path the visitor actually asked for, so the terminal line
+      // reflects the real miss rather than a placeholder.
+      document.getElementById('requested-path').textContent =
+        window.location.pathname + window.location.search;
+    </script>
+  </body>
+</html>

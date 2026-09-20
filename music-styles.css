@@ -1,0 +1,349 @@
+/* #music — lifetime listening stats on the homepage.
+   Colours come from the shared tokens in styles.css so both themes follow along.
+   The clock is a single-series chart: one hue throughout, with only the peak
+   hour emphasised. */
+
+.music {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 136, 0.02), transparent);
+}
+
+[data-theme='light'] .music {
+  background: transparent;
+}
+
+.music-intro {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+/* Loading state. The markup ships em-dash placeholders that hold the final
+   layout, so resolving the fetch fades numbers in without shifting anything. */
+.music-headline,
+.music-stats,
+.music-clock {
+  transition: opacity 0.4s ease;
+}
+
+.music[data-state='loading'] .music-headline,
+.music[data-state='loading'] .music-stats,
+.music[data-state='loading'] .music-clock {
+  opacity: 0.3;
+}
+
+/* -------------------------------------------------------------- headline */
+
+.music-headline {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.music-figure {
+  display: block;
+  font-size: clamp(3rem, 9vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.music-figure-label {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.music-stamp {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ----------------------------------------------------------- stat tiles */
+
+.music-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 4rem;
+  list-style: none;
+}
+
+.music-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.music-stat:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.music-stat-value {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.music-stat-label {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------------------------- subheads */
+
+.music-subhead {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--primary);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------- the clock */
+
+.music-clock {
+  position: relative;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.music-clock-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.music-clock-axis {
+  fill: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.music-clock-spoke {
+  stroke: var(--primary);
+  stroke-width: 9;
+  stroke-linecap: round;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+  /* Paired with pathLength="1" on the element: one dash spans the whole spoke,
+     so stroke-dashoffset 1 -> 0 draws it outward from the hub. */
+  stroke-dasharray: 1;
+}
+
+/* Opacity alone carries the peak well on the dark surface but washes out on the
+   light one, so weight is a second channel. Length is still the only thing
+   encoding the counts. */
+.music-clock-spoke.is-peak {
+  opacity: 1;
+  stroke-width: 12;
+}
+
+.music-clock-hit {
+  stroke: transparent;
+  stroke-width: 26;
+  cursor: crosshair;
+}
+
+/* While one hour is hovered the rest recede, so the tooltip's number and the
+   spoke it belongs to are unambiguous. JS owns these classes — sibling
+   selectors can't reach across the two-pass spoke/hit layering. */
+.music-clock-svg.is-hovered .music-clock-spoke {
+  opacity: 0.2;
+}
+
+.music-clock-svg.is-hovered .music-clock-spoke.is-active {
+  opacity: 1;
+}
+
+/* Centre of the face: the one call-out worth reading without hovering. */
+.music-clock-centre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.music-clock-centre span {
+  display: block;
+}
+
+.music-clock-peak-caption {
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.music-clock-peak-hour {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.music-clock-peak-count {
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+/* ------------------------------------------------------------- entrance */
+
+/* Driven by .in-view, which script.js toggles as the section enters and leaves
+   the viewport (so it replays on scroll-by, matching the other sections).
+   Everything animates FROM hidden rather than sitting at opacity 0 by default,
+   so if the observer never fires the section is simply visible instead of blank. */
+
+@keyframes music-sweep {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* The one bump: the busiest hour lands, then swells and settles. */
+@keyframes music-peak-bump {
+  0% {
+    stroke-width: 12;
+  }
+  40% {
+    stroke-width: 20;
+  }
+  100% {
+    stroke-width: 12;
+  }
+}
+
+@keyframes music-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes music-centre-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.88);
+  }
+}
+
+@keyframes music-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+/* Spokes sweep out from the hub clockwise from midnight, like a hand going
+   round the face. 28ms per hour puts the last spoke ~0.65s behind the first. */
+.music.in-view .music-clock-spoke {
+  animation: music-sweep 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--h) * 28ms);
+}
+
+.music.in-view .music-clock-spoke.is-peak {
+  animation:
+    music-sweep 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards,
+    music-peak-bump 0.5s ease-out backwards;
+  animation-delay: calc(var(--h) * 28ms), calc(var(--h) * 28ms + 0.42s);
+}
+
+.music.in-view .music-clock-axis {
+  animation: music-fade 0.5s ease-out backwards;
+  animation-delay: calc(var(--h) * 28ms);
+}
+
+/* Held back until the sweep is most of the way round. */
+.music.in-view .music-clock-centre {
+  animation: music-centre-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: 0.6s;
+}
+
+.music.in-view .music-headline {
+  animation: music-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.music.in-view .music-stat {
+  animation: music-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.music.in-view .music-stat:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.music.in-view .music-stat:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.music.in-view .music-stat:nth-child(3) {
+  animation-delay: 0.24s;
+}
+.music.in-view .music-stat:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.music.in-view .music-subhead {
+  animation: music-fade 0.6s ease-out backwards;
+  animation-delay: 0.2s;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 768px) {
+  .music {
+    padding: 5rem 0;
+  }
+
+  .music-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-stat {
+    transition: none;
+  }
+
+  .music-stat:hover {
+    transform: none;
+  }
+
+  /* Straight to the finished state — no sweep, no bump, no rise. */
+  .music.in-view .music-clock-spoke,
+  .music.in-view .music-clock-spoke.is-peak,
+  .music.in-view .music-clock-axis,
+  .music.in-view .music-clock-centre,
+  .music.in-view .music-headline,
+  .music.in-view .music-stat,
+  .music.in-view .music-subhead {
+    animation: none;
+  }
+}
+
+[data-theme='light'] .music-clock-svg.is-hovered .music-clock-spoke {
+  opacity: 0.25;
+}

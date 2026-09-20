@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+
+# Pre-optimisation copies of the site images, kept locally so the originals
+# can be re-derived at a different size. Not deployed, not committed.
+.img-backup/
+.theme-backup/

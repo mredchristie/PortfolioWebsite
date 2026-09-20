@@ -123,18 +123,6 @@
   border-radius: 12px;
   overflow: hidden;
   transition: var(--transition);
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .snippet-card:hover {
@@ -374,5 +362,306 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+  }
+}
+
+/* ── Expand affordance on the card ──────────────────────────────────── */
+
+.snippet-card {
+  cursor: pointer;
+}
+
+/* Keep the code preview from looking like it just stops mid-line: fade it out
+   and say what to do about it. pointer-events stays off so the preview can
+   still be scrolled and selected. */
+.snippet-code-wrapper::after {
+  content: 'Click to expand';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3.2rem 1rem 0.75rem;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  /* Muted via colour, not opacity - opacity would fade the gradient too and
+     let the code underneath show through the label. */
+  color: #7a8299;
+  background: linear-gradient(to bottom, transparent, #0f1223 72%);
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.snippet-card:hover .snippet-code-wrapper::after {
+  color: var(--primary);
+}
+
+.snippet-expand {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: flex;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.snippet-expand:hover,
+.snippet-expand:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.snippet-header-side {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* ── Full-code viewer ───────────────────────────────────────────────── */
+
+.snippet-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 22, 0.96);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.snippet-viewer[hidden] {
+  display: none;
+}
+
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1200px, 100%);
+  max-height: 92vh;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.viewer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.viewer-heading h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.4rem;
+  color: var(--text-primary);
+}
+
+.viewer-description {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 80ch;
+}
+
+.viewer-header-side {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.viewer-close {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  transition: var(--transition);
+}
+
+.viewer-close:hover,
+.viewer-close:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.viewer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.viewer-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.viewer-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.viewer-nav:hover:not(:disabled),
+.viewer-nav:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.viewer-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* The copy button is absolutely positioned inside cards; in the toolbar it
+   needs to sit in normal flow. */
+.viewer-copy {
+  position: static;
+  opacity: 1;
+}
+
+.viewer-code {
+  flex: 1;
+  overflow: auto;
+  padding: 1.2rem 0;
+  background: #0b0f26;
+}
+
+.viewer-code pre {
+  margin: 0;
+  white-space: pre;
+}
+
+.viewer-code code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+/* Line numbers. Each line is its own block so the number column stays put
+   while long lines scroll horizontally underneath. */
+.code-line {
+  display: block;
+  min-width: 100%;
+  width: max-content;
+  padding-right: 1.5rem;
+}
+
+.code-line:hover {
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.line-no {
+  display: inline-block;
+  width: 3.5rem;
+  padding-right: 1.2rem;
+  text-align: right;
+  /* Muted via colour, NOT opacity: opacity would fade the background too, and
+     this column has to stay opaque to mask the code scrolling under it. */
+  color: #55607f;
+  user-select: none; /* keep numbers out of copied text */
+  position: sticky;
+  left: 0;
+  background: #0b0f26; /* must match .viewer-code exactly */
+  z-index: 2; /* paint above the line's own text once it slides over */
+}
+
+.viewer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+[data-theme='light'] .snippet-code-wrapper::after {
+  background: linear-gradient(to bottom, transparent, #9d9a96 72%);
+  color: #2b2926;
+}
+
+[data-theme='light'] .line-no {
+  background: #e6e8ee;
+  color: #9aa1b0;
+}
+
+[data-theme='light'] .snippet-viewer {
+  background: rgba(240, 243, 250, 0.96);
+}
+
+[data-theme='light'] .viewer-code {
+  background: #e6e8ee;
+}
+
+@media (max-width: 768px) {
+  .snippet-viewer {
+    padding: 0;
+  }
+
+  .viewer-panel {
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+
+  .viewer-header,
+  .viewer-toolbar,
+  .viewer-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .viewer-description {
+    display: none; /* the code is the point on a small screen */
+  }
+
+  .line-no {
+    width: 2.6rem;
+    padding-right: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snippet-card,
+  .snippet-code-wrapper::after {
+    transition: none;
   }
 }

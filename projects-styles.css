@@ -185,6 +185,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -567,5 +568,200 @@
 @media (max-width: 768px) {
   [data-theme='light'] .stat-item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ============================================
+   PROJECT TEASERS — compact cards on index.html
+   that link through to the full write-ups here
+   ============================================ */
+.project-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.project-teaser {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 14, 39, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 12px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.project-teaser::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+}
+
+.project-teaser:hover {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.15);
+  transform: translateY(-4px);
+}
+
+.project-teaser:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.project-teaser-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.project-teaser h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.project-teaser p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}
+
+.project-teaser-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  /* Pushes the "Read more" affordance to the bottom so it lines up across
+     cards of differing description length. */
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+}
+
+.project-teaser-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+.project-teaser:hover .project-teaser-more svg {
+  transform: translateX(3px);
+}
+
+.project-teaser-more svg {
+  transition: transform 0.3s ease;
+}
+
+.projects-cta {
+  display: flex;
+  justify-content: center;
+  /* Clears the live API card above it, which otherwise butts straight up
+     against the button. */
+  margin-top: 2.5rem;
+}
+
+[data-theme='light'] .project-teaser {
+  background: rgba(237, 232, 225, 0.7);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-teaser:hover {
+    transform: none;
+  }
+  .project-teaser:hover .project-teaser-more svg {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-teaser-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-teaser {
+    padding: 1.4rem;
+  }
+}
+
+/* Deep links from the index teasers land below the fixed navbar. */
+.featured-project-card[id],
+.upcoming-card[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Standing caveat under a project card. Used by Cornish Water Watch, where the
+   subject makes the disclaimer part of the work rather than boilerplate. */
+.project-note {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--secondary);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Portalguard card: the demo recording, played by vendored asciinema-player
+   (static/asciinema-player.{js,css}) against static/portalguard-demo.cast -
+   see projects-script.js for the AsciinemaPlayer.create() call.
+
+   The recording is played at its native size (fit: false in the JS, no
+   scaling) rather than stretched to the card's width: the source terminal
+   is 68x38, a tall/narrow shape that fit:'width' or fit:'both' stretches or
+   letterboxes into an ugly, mostly-empty box. Native size plus centering
+   reuses the .terminal-window/.terminal-header chrome from the homepage
+   hero, so it reads as a real floating terminal window rather than a
+   stretched video. */
+.pg-terminal {
+  margin: 1.25rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pg-terminal-window {
+  display: inline-block;
+  max-width: 100%;
+  background: rgba(10, 14, 39, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.12);
+  overflow: hidden;
+}
+
+[data-theme='light'] .pg-terminal-window {
+  background: rgba(220, 213, 204, 0.8);
+}
+
+.pg-terminal-window .terminal-title {
+  font-size: 0.8rem;
+}
+
+.pg-terminal-player {
+  max-width: 100%;
+  overflow: auto;
+}
+
+@media (max-width: 600px) {
+  .pg-terminal-player {
+    transform-origin: top left;
+    zoom: 0.72;
   }
 }

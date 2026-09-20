@@ -7,8 +7,30 @@
       document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
     </script>
     <title>Code Snippets - Ed Christie</title>
-    <link rel="stylesheet" href="styles.css?v=202607190708" />
-    <link rel="stylesheet" href="snippets-styles.css?v=202607190708" />
+    <meta
+      name="description"
+      content="A searchable library of code snippets from Ed Christie's projects, covering TypeScript, Rust, Bash, Docker and CI/CD."
+    />
+    <meta name="author" content="Ed Christie" />
+    <link rel="canonical" href="https://mredchristie.dev/snippets.html" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:title" content="Code Snippets - Ed Christie" />
+    <meta
+      property="og:description"
+      content="A searchable library of code snippets from Ed Christie's projects, covering TypeScript, Rust, Bash, Docker and CI/CD."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mredchristie.dev/snippets.html" />
+    <meta property="og:image" content="https://mredchristie.dev/og-snippets.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Code snippets library by Ed Christie" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://mredchristie.dev/og-snippets.png" />
+
+    <link rel="stylesheet" href="styles.css?v=202609201407" />
+    <link rel="stylesheet" href="snippets-styles.css?v=202609201407" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,14 +61,41 @@
         </div>
         <ul class="nav-menu">
           <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
           <li><a href="index.html#skills" class="nav-link">Skills</a></li>
-          <li><a href="index.html#interests" class="nav-link">Interests</a></li>
-          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="index.html#music" class="nav-link">Music</a></li>
           <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-          <li><a href="snippets.html" class="nav-link">Snippets</a></li>
-          <li><a href="projects.html" class="nav-link">Current Projects</a></li>
-          <li><a href="travel.html" class="nav-link">Travel</a></li>
-          <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+          <li class="nav-more">
+            <!-- Opens on hover and on focus-within in CSS, so it still works with
+                 JavaScript off; the button below only adds click/Escape for touch. -->
+            <button
+              type="button"
+              class="nav-more-toggle"
+              aria-expanded="false"
+              aria-controls="nav-more-menu-snippets"
+            >
+              More<svg
+                aria-hidden="true"
+                class="nav-more-chevron"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <ul class="nav-more-menu" id="nav-more-menu-snippets">
+              <li><a href="index.html#interests" class="nav-more-item">Interests</a></li>
+              <li><a href="snippets.html" class="nav-more-item">Snippets</a></li>
+              <li><a href="travel.html" class="nav-more-item">Travel</a></li>
+              <li><a href="infrastructure.html" class="nav-more-item">Infrastructure</a></li>
+            </ul>
+          </li>
           <li>
             <a
               href="https://status.mredchristie.dev/status/main"
@@ -176,9 +225,13 @@
           </div>
           <div class="filter-buttons" role="group" aria-label="Filter snippets by language">
             <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-btn" data-filter="bash" aria-pressed="false">Jenkins/Bash</button>
+            <button class="filter-btn" data-filter="bash" aria-pressed="false">Bash</button>
+            <button class="filter-btn" data-filter="typescript" aria-pressed="false">
+              TypeScript
+            </button>
+            <button class="filter-btn" data-filter="rust" aria-pressed="false">Rust</button>
             <button class="filter-btn" data-filter="docker" aria-pressed="false">Docker</button>
-            <button class="filter-btn" data-filter="podman" aria-pressed="false">Podman</button>
+            <button class="filter-btn" data-filter="ci-cd" aria-pressed="false">CI/CD</button>
           </div>
         </div>
       </div>
@@ -211,11 +264,112 @@
       </div>
     </section>
 
+    <!-- Snippet Viewer (full-code modal) -->
+    <div
+      class="snippet-viewer"
+      id="snippet-viewer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewer-title"
+      hidden
+    >
+      <div class="viewer-panel">
+        <header class="viewer-header">
+          <div class="viewer-heading">
+            <h2 id="viewer-title"></h2>
+            <p class="viewer-description" id="viewer-description"></p>
+          </div>
+          <div class="viewer-header-side">
+            <span class="snippet-language" id="viewer-language"></span>
+            <button class="viewer-close" id="viewer-close" aria-label="Close snippet viewer">
+              <svg
+                aria-hidden="true"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="viewer-toolbar">
+          <span class="viewer-meta" id="viewer-meta"></span>
+          <div class="viewer-actions">
+            <button class="viewer-nav" id="viewer-prev" aria-label="Previous snippet">
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              Prev
+            </button>
+            <button class="viewer-nav" id="viewer-next" aria-label="Next snippet">
+              Next
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <button class="copy-button viewer-copy" id="viewer-copy">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="viewer-code" id="viewer-code-scroll">
+          <pre><code id="viewer-code"></code></pre>
+        </div>
+
+        <footer class="viewer-footer">
+          <div class="snippet-tags" id="viewer-tags"></div>
+          <span class="snippet-date" id="viewer-date"></span>
+        </footer>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
           <p>Designed & Built by Ed Christie</p>
+          <p class="footer-copyright">&copy; 2026 Ed Christie. All rights reserved.</p>
           <p class="footer-tech">
             Built with HTML, CSS, and vanilla JavaScript - Hosted on Cloudflare
           </p>
@@ -249,6 +403,7 @@
       </div>
     </footer>
 
-    <script src="snippets-script.js?v=202607190708"></script>
+    <script src="nav-more.js?v=202609201407"></script>
+    <script src="snippets-script.js?v=202609201407"></script>
   </body>
 </html>

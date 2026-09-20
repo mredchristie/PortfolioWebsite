@@ -156,6 +156,129 @@ body::before {
   width: 100%;
 }
 
+/* ---- "More" dropdown -------------------------------------------------------
+   Groups the secondary destinations (Interests, Snippets, Travel,
+   Infrastructure) so the top level stays at five items and stops colliding
+   with the logo. Opens on hover AND focus-within, so it is keyboard-operable
+   and still works with JavaScript off; the JS only adds click/Escape, which
+   is what touch devices need. */
+
+.nav-more {
+  position: relative;
+}
+
+/* Matches .nav-link, minus the button's own chrome. */
+.nav-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-more-toggle:hover,
+.nav-more:focus-within .nav-more-toggle,
+.nav-more-toggle.active {
+  color: var(--primary);
+}
+
+.nav-more-chevron {
+  transition: transform 0.25s ease;
+}
+
+.nav-more:hover .nav-more-chevron,
+.nav-more:focus-within .nav-more-chevron,
+.nav-more-toggle[aria-expanded='true'] .nav-more-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  min-width: 12rem;
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  /* --bg-card is a 5% overlay: fine for cards sitting on the page, but a
+     floating menu needs to be opaque or the content behind reads through it.
+     --bg-dark is the one background token that is solid in both themes. */
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  z-index: 10;
+  /* visibility (not display) so the fade can animate, and so the menu is not
+     reachable by keyboard while closed. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+}
+
+/* A transparent bridge across the gap, so the menu does not close when the
+   pointer travels from the button down onto it. */
+.nav-more::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 12rem;
+  height: 0.75rem;
+  display: none;
+}
+
+.nav-more:hover::after {
+  display: block;
+}
+
+.nav-more:hover .nav-more-menu,
+.nav-more:focus-within .nav-more-menu,
+.nav-more-toggle[aria-expanded='true'] + .nav-more-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-more-item {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.nav-more-item:hover,
+.nav-more-item:focus-visible {
+  background: var(--bg-card);
+  color: var(--primary);
+}
+
+.nav-more-item.active {
+  color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-more-menu,
+  .nav-more-chevron {
+    transition: none;
+  }
+}
+
 .nav-status-btn {
   display: inline-flex;
   align-items: center;
@@ -606,8 +729,11 @@ body::before {
 .reveal-track {
   position: relative;
   /* Extra viewport height beyond the pinned panel = the scroll distance spent
-     scrubbing the unmask. Larger = slower/longer transition. */
-  height: 360vh;
+     scrubbing the unmask. Larger = slower/longer transition.
+     270vh - 100vh pinned = 170vh of scrub. Paired with the 13% holds in
+     script.js that's ~126vh of actual morph, so the dissolve keeps roughly the
+     pace it had at 360vh without the screen-plus of frozen scrolling. */
+  height: 270vh;
 }
 
 .reveal-sticky {
@@ -1268,6 +1394,31 @@ body::before {
 
   .nav-menu.active {
     left: 0;
+  }
+
+  /* In the hamburger panel there is nothing to overlay, so the dropdown just
+     becomes part of the list - always open, no floating card. */
+  .nav-more-toggle {
+    display: none;
+  }
+
+  .nav-more-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    min-width: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-more-item {
+    padding: 0;
+    font-size: 0.95rem;
   }
 
   .hamburger {

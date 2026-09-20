@@ -1,203 +1,136 @@
-# Ed Christie - Portfolio Website
+# mredchristie.dev
 
-A modern, unique portfolio website showcasing skills, projects, and experience as an Applied Software Engineer.
+Source for my personal portfolio — [mredchristie.dev](https://mredchristie.dev).
 
-## 🌟 Features
+Hand-written HTML, CSS and vanilla JavaScript. No framework, no build step, no bundler.
+The whole site is static files mirrored to a Cloudflare R2 bucket.
 
-- **Terminal-Style Hero Section** - Interactive typing animation with terminal window design
-- **Animated Profile Card** - Rotating gradient ring effect with status indicator
-- **Dynamic Skills Display** - Categorized skill cards with hover effects
-- **GitHub Integration** - Automatically fetches and displays your latest repositories via GitHub API
-- **Responsive Design** - Fully mobile-friendly with hamburger menu
-- **Smooth Animations** - Scroll-triggered animations and smooth transitions
-- **Modern Glassmorphism UI** - Backdrop blur effects and gradient accents
-- **Easter Egg** - Konami code activation (try it!)
+## Pages
 
-## 🚀 Deployment to Cloudflare Pages
+| Page                  | What's on it                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------- |
+| `index.html`          | Terminal hero, about, project teasers, skills, interests carousel, listening stats, contact |
+| `projects.html`       | Full write-ups for each project — the teasers on the homepage link here                     |
+| `infrastructure.html` | How the site and its services are self-hosted, with architecture diagrams                   |
+| `snippets.html`       | Searchable library of reusable code snippets                                                |
+| `travel.html`         | Photo gallery with filtering and a keyboard-navigable lightbox                              |
+| `404.html`            | Not-found page styled as a failed `cd`                                                      |
 
-### Option 1: Quick Deploy (Recommended)
-
-1. **Push to GitHub**
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin YOUR_GITHUB_REPO_URL
-   git push -u origin main
-   ```
-
-2. **Connect to Cloudflare Pages**
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Navigate to Pages → Create a project
-   - Connect your GitHub account
-   - Select your portfolio repository
-   - Configure build settings:
-     - **Framework preset**: None
-     - **Build command**: (leave empty)
-     - **Build output directory**: `/`
-   - Click "Save and Deploy"
-
-3. **Configure Custom Domain**
-   - In Cloudflare Pages, go to your project
-   - Click "Custom domains" → Add custom domain
-   - Enter `mredchristie.dev`
-   - Follow DNS setup instructions
-
-### Option 2: Using Cloudflare R2 Bucket
-
-If you want to use R2 bucket storage:
-
-1. **Create R2 Bucket**
-
-   ```bash
-   # Install Wrangler CLI
-   npm install -g wrangler
-
-   # Login to Cloudflare
-   wrangler login
-
-   # Create bucket
-   wrangler r2 bucket create portfolio-website
-   ```
-
-2. **Upload Files**
-
-   ```bash
-   # Upload all files to R2
-   wrangler r2 object put portfolio-website/index.html --file=index.html
-   wrangler r2 object put portfolio-website/styles.css --file=styles.css
-   wrangler r2 object put portfolio-website/script.js --file=script.js
-   wrangler r2 object put portfolio-website/profile.jpg --file=profile.jpg
-   ```
-
-3. **Configure Public Access**
-   - Go to R2 in Cloudflare Dashboard
-   - Select your bucket
-   - Enable public access
-   - Connect custom domain `mredchristie.dev`
-
-## 📝 Customization Guide
-
-### 1. Replace Placeholder Information
-
-**In `index.html`:**
-
-- Line 78-85: Update personal information (age, location, university, status)
-- Line 87-92: Modify the about description
-- Line 238-260: Update contact links (email, LinkedIn, GitHub)
-- Add your profile picture as `profile.jpg` in the same directory
-
-**In `script.js`:**
-
-- Line 2: Update the terminal typing text with your own introduction
-- Line 67: Replace `'yourusername'` with your actual GitHub username
-- Line 256-257: Update GitHub profile URL in console message
-
-### 2. Add Your Profile Picture
-
-Replace the `profile.jpg` placeholder with your actual photo:
-
-- Recommended size: 600x600px minimum
-- Format: JPG, PNG, or WebP
-- Name it `profile.jpg` or update the src in `index.html` line 54
-
-### 3. Customize Colors
-
-Edit CSS variables in `styles.css` (lines 1-11):
-
-```css
-:root {
-  --primary: #00ff88; /* Main accent color */
-  --secondary: #0099ff; /* Secondary accent */
-  --bg-dark: #0a0e27; /* Dark background */
-  --bg-darker: #050816; /* Darker background */
-}
-```
-
-### 4. Update Skills
-
-In `index.html`, section starting at line 103, modify skill categories and tags to match your expertise.
-
-### 5. Configure GitHub Integration
-
-The site automatically fetches your 6 most recently updated public repositories. To customize:
-
-- Edit `script.js` line 70 to change the number of repos
-- Modify line 75-76 to change filtering/sorting logic
-
-## 📁 Project Structure
+## Layout
 
 ```
-portfolio-website/
-├── index.html          # Main HTML structure
-├── styles.css          # All styling and animations
-├── script.js           # Interactive functionality
-├── profile.jpg         # Your profile picture
-└── README.md          # This file
+.
+├── index.html / projects.html / infrastructure.html / snippets.html / travel.html / 404.html
+├── styles.css              # shared: theme vars, nav, hero, reveal, interests, contact, footer
+├── projects-styles.css     # project cards + teasers (used by index, projects, infrastructure)
+├── music-styles.css        # #music section on the homepage
+├── snippets-styles.css     # snippets page only
+├── travel-styles.css       # gallery + lightbox
+├── script.js               # homepage: typing animation, nav, theme, scroll reveal
+├── nav-more.js             # shared: click/Escape handling for the nav "More" dropdown
+├── projects-script.js      # projects + infrastructure pages
+├── music-script.js         # #music: stats.fm fetch, listening-clock chart
+├── snippets-script.js      # snippet search/filter/render
+├── travel-script.js        # gallery filtering + lightbox
+├── photos/                 # travel gallery images, by trip
+├── *-card.webp             # 600px renditions used by the homepage interests carousel
+├── *-card.jpg              # their JPEG masters — kept in the repo, not deployed
+├── og-*.png                # Open Graph link-preview cards, one per page
+├── og-card-template.html   # the card design; rasterised by make-og-cards.py
+├── make-og-cards.py        # regenerate the og-*.png cards
+├── deploy.sh               # format, cache-bust, mirror to R2, purge Cloudflare
+├── refresh-music-snapshot.py  # re-bake the #music fallback data
+├── sitemap.xml / robots.txt
+└── .img-backup/            # pre-optimisation originals (gitignored, not deployed)
 ```
 
-## 🎨 Technologies Used
+## Conventions
 
-- **HTML5** - Semantic markup
-- **CSS3** - Custom properties, Grid, Flexbox, Animations
-- **Vanilla JavaScript** - No framework dependencies
-- **GitHub API** - Dynamic project loading
-- **Google Fonts** - JetBrains Mono & Inter
+**Theming.** Colours come from CSS custom properties on `:root` in `styles.css`. Light mode is
+applied via `[data-theme='light']` overrides. The theme is read from `localStorage` in an inline
+`<script>` in each `<head>` — before first paint, so there's no flash of the wrong theme.
 
-## 🌐 Browser Support
+**Images.** Everything the homepage serves is WebP. The `.png`/`.jpg` masters stay in the repo
+so the renditions can be regenerated, but `deploy.sh` excludes them from the bucket — dropping
+the homepage image payload from ~1.5 MB to ~275 KB. Regenerate with
+`cwebp -q 82 in.png -o out.webp`. `travel.html` still reuses the full-size JPEG originals,
+because its lightbox displays them at up to ~1400px. Every `<img>` carries
+intrinsic `width`/`height` so nothing reflows as images load. Gallery images are `loading="lazy"`;
+the two profile cutouts in the reveal section are deliberately eager, because the scroll-scrubbed
+dissolve needs both layers decoded before the scrub begins.
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
+**Listening stats.** The `#music` section reads lifetime Spotify numbers from the
+stats.fm public API (`api.stats.fm/api/v1`) straight from the browser — it sends
+`access-control-allow-origin: *`, so there's no key, proxy or build step. Two endpoints
+supply the headline counts and the hour-of-day buckets behind the listening clock.
 
-## 🔧 Local Development
+Set `STATSFM.user` at the top of `music-script.js`; the fetch is skipped while it reads
+`REPLACE_ME`. The stats.fm privacy toggles for _Streams_ and _Stats_ must be
+public or the API refuses those endpoints. `SNAPSHOT` in the same file is the baked
+fallback used when the fetch fails — regenerate it with `./refresh-music-snapshot.py`. If
+there's no live data _and_ no snapshot the section removes itself rather than render
+placeholder numbers.
 
-1. Clone the repository
-2. Open `index.html` in a browser
-3. Or use a local server:
+The clock is pinned to `Europe/London` on purpose: it describes when _I_ listen, so
+rendering it in the viewer's timezone would tell a different story per reader.
 
-   ```bash
-   # Python
-   python -m http.server 8000
+**Navigation.** The navbar carries five primary links; Interests, Snippets, Travel and
+Infrastructure sit under a "More" dropdown so the top level can't collide with the logo. The
+menu opens on `:hover` and `:focus-within` in CSS, so mouse and keyboard work with JavaScript
+off, and below 768px it flattens into the hamburger panel and is always visible. `nav-more.js`
+only adds click/Escape, which is what a touch device wide enough for the desktop nav needs.
+The markup is duplicated across all five pages — change one, change them all.
 
-   # Node.js
-   npx http-server
-   ```
+**Working without JavaScript.** There's no full-screen "JavaScript required" wall: about,
+projects, skills and contact are static HTML and render fine. The hero copy is authored in
+`index.html` (not in `script.js`) so it reads without JS and is indexable; the typing animation
+reads it out of the DOM, blanks the element and types it back. A `<noscript><style>` in the
+`<head>` hides the two sections that genuinely can't work — `#profile`, a scroll-scrubbed
+dissolve, and `#music`, which renders from an API — and a slim banner says so.
 
-4. Navigate to `http://localhost:8000`
+**Link previews.** Each page points `og:image` at its own 1200×630 card rather than sharing one
+profile photo. `make-og-cards.py` rasterises `og-card-template.html` with headless Chrome, one
+card per entry in its `CARDS` dict. Re-run it after changing a page title:
 
-## ⚡ Performance Tips
+```bash
+./make-og-cards.py
+```
 
-- Images are lazy-loaded
-- CSS animations use GPU acceleration
-- Minimal JavaScript dependencies
-- Optimized for Lighthouse scores
+**Cache busting.** `deploy.sh` rewrites every local `css`/`js` reference with a `?v=<timestamp>`
+before mirroring, so Cloudflare's edge cache can't pair new HTML with stale assets.
 
-## 🎯 Future Enhancements
+**Project content.** Full project write-ups live only in `projects.html`. The homepage carries
+short teasers that deep-link to `projects.html#<id>`. Keep it that way — duplicating the copy on
+both pages is what the teaser split was introduced to fix.
 
-- [ ] Add dark/light theme toggle
-- [ ] Blog section integration
-- [ ] Contact form with Cloudflare Workers
-- [ ] Project case studies
-- [ ] Resume download section
-- [ ] Analytics integration
+## Local development
 
-## 📄 License
+No build step. Open `index.html` directly, or serve the directory to get correct absolute paths:
 
-Feel free to use this template for your own portfolio. Attribution appreciated but not required!
+```bash
+python3 -m http.server 8000
+# then http://localhost:8000
+```
 
-## 🤝 Contributing
+## Formatting
 
-Found a bug or have a suggestion? Feel free to open an issue or submit a pull request.
+Prettier is the only dependency.
 
-## 📧 Contact
+```bash
+npm install
+npm run format
+```
 
-- Website: mredchristie.dev
-- LinkedIn: [Your LinkedIn URL]
-- GitHub: [Your GitHub URL]
+## Deploying
 
----
+```bash
+./deploy.sh
+```
 
-**Built with 💚 by Ed Christie**
+Formats, stamps asset versions, mirrors to the R2 bucket via `mc`, then purges the Cloudflare
+cache. The purge step needs an API token with `Zone → Cache Purge` at
+`~/.config/cloudflare/purge-token`; it's skipped with a warning if that file is absent.
+
+## Licence
+
+Feel free to borrow ideas or structure. Attribution appreciated, not required.

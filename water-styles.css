@@ -1,0 +1,105 @@
+/* The Cornish Water Watch card on the homepage: live figures pulled from this
+   site's own public API. Sits under the project teasers, before the CTA. */
+
+.water-card {
+  margin-top: 2rem;
+  padding: 1.4rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--secondary);
+  border-radius: 10px;
+  transition: opacity 0.4s ease;
+}
+
+.water-card[data-state='loading'] {
+  opacity: 0.45;
+}
+
+.water-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+
+.water-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.water-card-head a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.water-card-head a:hover {
+  text-decoration: underline;
+}
+
+.water-intro {
+  margin: 0 0 1.4rem;
+  max-width: 68ch;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.water-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.water-value {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.water-label {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.water-note {
+  margin: 1.2rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.water-stamp {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .water-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-card {
+    transition: none;
+  }
+}

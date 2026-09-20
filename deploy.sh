@@ -27,10 +27,15 @@ PYEOF
 
 echo "Deploying to Cloudflare R2..."
 # Exclude config, dev, and VCS files so only website content is published.
+# NOTE: mc mirror does not read .gitignore. Anything that should stay off the
+# public bucket has to be listed here as well, or it gets published.
+# The .png/-card.jpg originals are kept in the repo as masters but superseded
+# on the site by their .webp versions, so they are not published either.
 # (A public .git/ directory in particular would expose your full source.)
 mc mirror --overwrite \
   --exclude ".git/*" \
   --exclude ".claude/*" \
+  --exclude ".img-backup/*" \
   --exclude "node_modules/*" \
   --exclude "*.DS_Store" \
   --exclude "deploy.sh" \
@@ -39,8 +44,19 @@ mc mirror --overwrite \
   --exclude ".prettierrc" \
   --exclude ".prettierignore" \
   --exclude "README.md" \
+  --exclude "refresh-music-snapshot.py" \
+  --exclude "make-og-cards.py" \
+  --exclude "og-card-template.html" \
+  --exclude "profile-ski.png" \
+  --exclude "profile-train.png" \
+  --exclude "*-card.jpg" \
+  --exclude ".theme-backup/*" \
+  --exclude "revert-theme.sh" \
+  --exclude ".gitignore" \
   --exclude "*.excalidraw" \
   --exclude "WireframeFuture.svg" \
+  --exclude "profile.png" \
+  --exclude "profile-glasses.png" \
   . r2/website
 
 # Purge the Cloudflare cache so everything updates immediately. Needs an API

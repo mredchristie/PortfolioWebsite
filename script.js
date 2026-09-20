@@ -1,8 +1,14 @@
-// Terminal typing animation
-const text =
-  "Hello! I'm Ed Christie, an Applied Software Engineering graduate from Cardiff University (2:1 Honours), specializing in full-stack development, accessible design, and modern web technologies. Currently building innovative solutions with React, PostgreSQL, and Docker...";
-let index = 0;
+// Terminal typing animation.
+// The copy is authored in index.html so the hero still says something with
+// JavaScript off (and so search engines index it). We read it out of the
+// element, clear it, then type it back in one character at a time.
 const typingElement = document.getElementById('typing-text');
+const text = typingElement.textContent.trim();
+// Blank it here, at parse time (this script sits at the end of <body>), not on
+// `load` - waiting for load would show the finished text and then visibly
+// restart it as the animation kicks in.
+typingElement.textContent = '';
+let index = 0;
 const typingSpeed = 10;
 
 function typeWriter() {
@@ -89,7 +95,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for scroll animations
 window.addEventListener('load', () => {
-  const sections = document.querySelectorAll('.about, .skills, .projects, .contact');
+  const sections = document.querySelectorAll('.about, .skills, .music, .projects, .contact');
   sections.forEach((section) => {
     section.style.opacity = '0';
     section.style.transform = 'translateY(30px)';
@@ -195,10 +201,11 @@ animateParticles();
       return;
     }
     const raw = clamp(-rect.top / scrubDistance);
-    // Hold the helmet for the first 22%, run the morph across the middle ~56%,
-    // then hold the face for the last 22% — makes the change clearly begin,
-    // transition, and settle instead of blending the entire scroll.
-    const morph = clamp((raw - 0.22) / 0.56);
+    // Hold the helmet for the first 13%, run the morph across the middle 74%,
+    // then hold the face for the last 13% — enough of a beat either side for the
+    // change to read as begin/transition/settle, without leaving the photo
+    // frozen for a screen of scrolling at each end.
+    const morph = clamp((raw - 0.13) / 0.74);
     // Smoothstep easing so the morph eases in and out rather than being linear.
     const eased = morph * morph * (3 - 2 * morph);
     stage.style.setProperty('--reveal', eased.toFixed(4));
@@ -256,7 +263,9 @@ animateParticles();
   // Wait for DOM to be ready
   function initScrollAnimations() {
     // Observe major sections
-    const sections = document.querySelectorAll('.about, .skills, .interests, .projects, .contact');
+    const sections = document.querySelectorAll(
+      '.about, .skills, .interests, .music, .projects, .contact'
+    );
     sections.forEach((section) => {
       scrollObserver.observe(section);
     });
@@ -307,43 +316,3 @@ animateParticles();
 // <div data-scroll="fade-up">Content</div>
 // <div data-scroll="fade-left" data-scroll-delay="200">Content</div>
 // <div data-scroll="zoom-in" data-scroll-delay="400">Content</div>
-
-// Scroll animation observer for snippets section
-const snippetsScrollObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.boundingClientRect.top > 0) {
-        entry.target.classList.add('in-view');
-        snippetsScrollObserver.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px',
-  }
-);
-
-// Observe the snippets section when it exists
-function observeSnippetsSection() {
-  const snippetsSection = document.querySelector('.snippets-section');
-  if (snippetsSection) {
-    snippetsScrollObserver.observe(snippetsSection);
-  }
-}
-
-// Initialize after snippets are rendered
-const originalRenderSnippets = renderSnippets;
-renderSnippets = function () {
-  originalRenderSnippets();
-  // Reset animation state when re-rendering (e.g., after search/filter)
-  setTimeout(() => {
-    const snippetsSection = document.querySelector('.snippets-section');
-    if (snippetsSection) {
-      snippetsSection.classList.add('in-view');
-    }
-  }, 100);
-};
-
-// Observe on page load
-observeSnippetsSection();

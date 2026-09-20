@@ -7,8 +7,32 @@
       document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
     </script>
     <title>Current Projects - Ed Christie</title>
-    <link rel="stylesheet" href="styles.css?v=202607190708" />
-    <link rel="stylesheet" href="projects-styles.css?v=202607190708" />
+    <meta
+      name="description"
+      content="Detailed write-ups of Ed Christie's projects: Secure Package Registry, Portalguard, CS2Price, UK Weather Consensus and UK Surf Forecast, covering Go, SvelteKit, TypeScript, PostgreSQL and Docker."
+    />
+    <meta name="author" content="Ed Christie" />
+    <link rel="canonical" href="https://mredchristie.dev/projects.html" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:title" content="Projects - Ed Christie" />
+    <meta
+      property="og:description"
+      content="Detailed write-ups of Ed Christie's projects: Secure Package Registry, Portalguard, CS2Price, UK Weather Consensus and UK Surf Forecast, covering Go, SvelteKit, TypeScript, PostgreSQL and Docker."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mredchristie.dev/projects.html" />
+    <meta property="og:image" content="https://mredchristie.dev/og-projects.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Projects by Ed Christie" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://mredchristie.dev/og-projects.png" />
+
+    <link rel="stylesheet" href="styles.css?v=202609201407" />
+    <link rel="stylesheet" href="projects-styles.css?v=202609201407" />
+    <!-- Vendored (not CDN-loaded): plays the Portalguard demo recording -->
+    <link rel="stylesheet" href="static/asciinema-player.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,13 +67,41 @@
         </div>
         <ul class="nav-menu">
           <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
           <li><a href="index.html#skills" class="nav-link">Skills</a></li>
-          <li><a href="index.html#interests" class="nav-link">Interests</a></li>
-          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="index.html#music" class="nav-link">Music</a></li>
           <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-          <li><a href="snippets.html" class="nav-link">Snippets</a></li>
-          <li><a href="travel.html" class="nav-link">Travel</a></li>
-          <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+          <li class="nav-more">
+            <!-- Opens on hover and on focus-within in CSS, so it still works with
+                 JavaScript off; the button below only adds click/Escape for touch. -->
+            <button
+              type="button"
+              class="nav-more-toggle"
+              aria-expanded="false"
+              aria-controls="nav-more-menu-projects"
+            >
+              More<svg
+                aria-hidden="true"
+                class="nav-more-chevron"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <ul class="nav-more-menu" id="nav-more-menu-projects">
+              <li><a href="index.html#interests" class="nav-more-item">Interests</a></li>
+              <li><a href="snippets.html" class="nav-more-item">Snippets</a></li>
+              <li><a href="travel.html" class="nav-more-item">Travel</a></li>
+              <li><a href="infrastructure.html" class="nav-more-item">Infrastructure</a></li>
+            </ul>
+          </li>
           <li>
             <a
               href="https://status.mredchristie.dev/status/main"
@@ -160,7 +212,7 @@
           Featured Project
         </h2>
 
-        <div class="featured-project-card">
+        <div class="featured-project-card" id="spr">
           <div class="featured-project-header">
             <div class="project-status-badge">
               <span class="status-dot-complete"></span>
@@ -173,59 +225,40 @@
           <p class="featured-project-role">Final Year Project, Cardiff University</p>
 
           <p class="featured-project-description">
-            A preventative security layer for the npm and Go Modules ecosystems that vets packages
-            <em>before</em> they reach developers, not after. SPR is an event-driven,
-            service-oriented registry where every package version undergoes sandboxed behavioural
-            analysis, provenance verification, and reproducible builds before being promoted to the
-            curated registry. It closes the gap that tools like Snyk and npm audit leave open: the
-            window between a malicious publish and detection.
+            Most package security tools tell you about a bad dependency after you have already
+            installed it. SPR flips that around: every version gets run in a sandbox and checked for
+            tampering <em>before</em> it reaches anyone. My final year project at Cardiff.
           </p>
 
           <div class="feature-list">
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >eBPF-based behavioural analysis via Tracee on GitHub Actions runners, capturing
-                syscalls, file access, network connections, and DNS; HTTPS traffic decrypted using
-                ecapture without being detectable by the package under test</span
+                >Every package version runs in a sandbox on GitHub Actions runners while eBPF
+                tracing watches what it actually does: files touched, network calls made, DNS looked
+                up</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Reproducible builds and provenance verification (upstream attestation, OSS rebuild,
-                or in-house reproducible build) to detect source-to-release tampering</span
+                >Rebuilds each package from source and compares the result, which catches a release
+                that does not match the code it claims to come from</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >0–3 trust score combining behavioural results and provenance signals, with manual
-                review override for enterprise compliance and a policy-based registry proxy blocking
-                untrusted pulls</span
+                >Event-driven services talking over RabbitMQ, so a slow scan never blocks the
+                registry</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Dual Gitea registry model: curated <code>spr-registry</code> for approved packages
-                and isolated <code>spr-sandbox</code> for analysis; package managers point at SPR
-                with no workflow changes</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >RabbitMQ-driven pipeline (poller → core-svc → be-runner) with full dependency tree
-                resolution and transitive mirroring before sandboxed execution</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >Addresses real-world attacks including event-stream (2018), xz-utils backdoor, and
-                ua-parser-js compromise, covering the broader class of threats existing tools
-                miss</span
+                >Every version comes out with a risk level, and anything that fails is kept out of
+                the registry entirely, so it never reaches an npm install. That closes the window
+                Snyk and npm audit leave open</span
               >
             </div>
           </div>
@@ -300,8 +333,53 @@
           </div>
         </div>
 
+        <div class="featured-project-card" id="portalguard">
+          <div class="featured-project-header">
+            <div class="project-status-badge">
+              <span class="status-dot-complete"></span>
+              v0.1 working
+            </div>
+            <span class="project-date">August 2026</span>
+          </div>
+
+          <h3 class="featured-project-title">Portalguard</h3>
+
+          <p class="featured-project-description">
+            Public wifi blocks everything until you accept the terms on the login page. A full
+            tunnel VPN can't get through that block. So you turn the VPN off, log in, then turn it
+            back on. Your traffic is exposed for that whole window. PortalGuard closes it. It locks
+            the connection down, lets only the portal login through, then hands control back to the
+            VPN.
+          </p>
+
+          <figure class="pg-terminal">
+            <figcaption class="sr-only">
+              Terminal recording: portalguard check reports the internet reachable, blocked during a
+              lockdown, then reachable again after release
+            </figcaption>
+            <div class="pg-terminal-window">
+              <div class="terminal-header">
+                <div class="terminal-buttons">
+                  <span class="btn-close"></span>
+                  <span class="btn-minimize"></span>
+                  <span class="btn-maximize"></span>
+                </div>
+                <span class="terminal-title">~/portalguard</span>
+              </div>
+              <div id="pg-demo-player" class="pg-terminal-player"></div>
+            </div>
+          </figure>
+
+          <div class="project-tech">
+            <span class="tech-tag">Go</span>
+            <span class="tech-tag">pf / pfctl</span>
+            <span class="tech-tag">macOS</span>
+            <span class="tech-tag">Networking</span>
+            <span class="tech-tag">CLI</span>
+          </div>
+        </div>
         <!-- CS2Price Project Card -->
-        <div class="upcoming-card">
+        <div class="upcoming-card" id="cs2price">
           <div class="featured-project-header">
             <div class="project-status-badge">
               <span class="status-dot-live"></span>
@@ -312,56 +390,31 @@
 
           <h3>CS2Price</h3>
           <p>
-            A real-time CS2 skin price aggregator that polls multiple third-party marketplaces
-            (Skinport, Waxpeer, DMarket, CSFloat, Buff163) and presents the cheapest listings per
-            skin in a single searchable interface. Built to eliminate the tedium of comparing prices
-            across tabs manually.
+            Buying a CS2 skin normally means five open tabs and doing the currency conversion in
+            your head. This polls all five marketplaces, converts everything to USD, and gives you
+            one search box with the cheapest listing for any skin.
           </p>
 
           <div class="feature-list">
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Polls 5 marketplaces on configurable cron schedules, storing normalised USD prices
-                in PostgreSQL</span
+                >Polls Skinport, Waxpeer, DMarket, CSFloat and Buff163 on a schedule and normalises
+                every price to USD</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span>Authenticated DMarket API integration with signed request handling</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Buyer/Seller fee toggle showing what you pay versus what the seller receives after
-                platform fees</span
+                >Redis caching and a Postgres price history, so you can see whether today is
+                actually a good day to buy</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Float value bar with accurate condition zone markers (FN/MW/FT/WW/BS) aligned to
-                real float boundaries</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >Fallback search links on every card guarantee 3+ marketplace links even when no
-                live listing exists</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >FX rate refresh via Frankfurter API; skin images via ByMykel community API</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >Companion desktop app in progress (Tauri: Rust + SvelteKit) reusing the same API to
-                value Steam inventories</span
+                >DMarket needs signed, authenticated requests, which was the fiddliest part of the
+                whole thing</span
               >
             </div>
           </div>
@@ -376,6 +429,19 @@
           </div>
 
           <div class="project-actions" style="margin-top: 1.5rem">
+            <a
+              href="https://github.com/mredchristie/cs2-prices"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn primary"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                />
+              </svg>
+              View on GitHub
+            </a>
             <a
               href="https://cs2price.mredchristie.dev"
               target="_blank"
@@ -404,7 +470,7 @@
         </div>
 
         <!-- UK Weather Consensus Card -->
-        <div class="upcoming-card">
+        <div class="upcoming-card" id="weather">
           <div class="featured-project-header">
             <div class="project-status-badge">
               <span class="status-dot-live"></span>
@@ -415,49 +481,37 @@
 
           <h3>UK Weather Consensus</h3>
           <p>
-            A forecast engine that doesn't just blend the world's leading weather models - it scores
-            them. Stored forecasts from six models are checked against what actually happened at
-            your nearest weather station, and the forecast then follows whichever model has been
-            most accurate for each variable at that location.
+            Most forecast apps average the models together. This one scores them instead. It
+            remembers what six models predicted, checks each against what actually happened at your
+            nearest station, and then follows whichever has been most accurate for that measurement
+            in that place.
           </p>
 
           <div class="feature-list">
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Pulls UKMO (2 km), ECMWF, GFS, ICON and Météo-France via Open-Meteo, plus MET
-                Norway as an independent source, storing every hourly series in SQLite on a rolling
-                30-day window</span
+                >Pulls UKMO, ECMWF, GFS, ICON, Meteo-France and MET Norway, and stores every hourly
+                prediction for 30 days</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Scores each model's recent error per variable and location against METAR
-                observations and Environment Agency rain gauges, then follows the best model per
-                variable instead of diluting it in an average</span
+                >Scores each model against real station readings, per measurement and per location,
+                so it might trust one model for rain and another for wind</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Honest confidence chips driven by the best model's measured recent error, with live
-                readings from the nearest station shown beside the forecast</span
+                >Confidence is based on how wrong that model has recently been, rather than being
+                decorative</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >Click any hour for a model-by-model breakdown showing exactly where the models
-                agree and disagree</span
-              >
-            </div>
-            <div class="feature-item">
-              <span class="feature-arrow">▸</span>
-              <span
-                >Postcode and town typeahead via postcodes.io, with NASA EONET natural events
-                overlaid within 500 km</span
-              >
+              <span class="feature-arrow">&#9656;</span>
+              <span>Click any hour to see what each model said, including where they disagree</span>
             </div>
           </div>
 
@@ -498,7 +552,7 @@
         </div>
 
         <!-- UK Surf Forecast Card -->
-        <div class="upcoming-card">
+        <div class="upcoming-card" id="surf">
           <div class="featured-project-header">
             <div class="project-status-badge">
               <span class="status-dot-live"></span>
@@ -509,31 +563,31 @@
 
           <h3>UK Surf Forecast</h3>
           <p>
-            A companion to the weather app for UK surf breaks. Raw marine data means little on its
-            own, so each break's orientation is used to turn swell and wind into the answer surfers
-            actually want: is it working?
+            Raw marine data does not tell you much on its own. A 2m swell is brilliant at one beach
+            and useless at the next depending on which way it faces. This works that out for 15 UK
+            breaks and gives each one a star rating.
           </p>
 
           <div class="feature-list">
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Swell height, period and direction from Open-Meteo's Marine API, alongside combined
-                sea state, sea surface temperature and land wind</span
+                >Swell height, period and direction from Open-Meteo, plus sea state, water
+                temperature and land wind</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Classifies wind as offshore, cross-shore or onshore for each of 15 named UK breaks
-                using the beach's facing direction</span
+                >Works out whether the wind is offshore, cross-shore or onshore for each break using
+                the direction the beach faces</span
               >
             </div>
             <div class="feature-item">
-              <span class="feature-arrow">▸</span>
+              <span class="feature-arrow">&#9656;</span>
               <span
-                >Computes swell exposure (how square-on the swell arrives) and derives an hourly 1–5
-                star rating from height, period, exposure and wind quality</span
+                >Turns all of it into a 1 to 5 star rating, because that is the bit you actually
+                want</span
               >
             </div>
           </div>
@@ -572,13 +626,124 @@
           </div>
         </div>
 
+        <div class="upcoming-card" id="cornish-water">
+          <div class="featured-project-header">
+            <div class="project-status-badge">
+              <span class="status-dot-live"></span>
+              Live
+            </div>
+            <span class="project-date">August 2026 – Present</span>
+          </div>
+
+          <h3>Cornish Water Watch</h3>
+          <p>
+            South West Water publish which storm overflows are discharging right now, but not what
+            happened yesterday. There is no history to look up, so I started keeping one. A job runs
+            every 15 minutes and records what it finds, alongside six years of audited Environment
+            Agency figures, and the whole thing is served as an open API.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-arrow">&#9656;</span>
+              <span
+                >A Cloudflare Worker polls every 15 minutes into D1 and logs its own health, so a
+                dead job cannot be mistaken for a quiet week with no spills</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">&#9656;</span>
+              <span
+                >Backfilled 2020 to 2025 from Environment Agency spreadsheets, where the columns, ID
+                scheme and even the units change between years</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">&#9656;</span>
+              <span
+                >A spill can end in three states, not two. The third is for when a monitor drops
+                offline mid-discharge and nobody actually knows when it stopped</span
+              >
+            </div>
+            <div class="feature-item">
+              <span class="feature-arrow">&#9656;</span>
+              <span
+                >Every response says where the number came from and whether it has been audited,
+                because the live feed has not been</span
+              >
+            </div>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Cloudflare Workers</span>
+            <span class="tech-tag">D1 / SQLite</span>
+            <span class="tech-tag">OpenAPI</span>
+          </div>
+
+          <div class="project-actions" style="margin-top: 1.5rem">
+            <a
+              href="https://water.mredchristie.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn secondary"
+            >
+              <svg
+                aria-hidden="true"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              Live Site<span class="sr-only"> (opens in new tab)</span>
+            </a>
+            <a
+              href="https://water.mredchristie.dev/docs"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn secondary"
+            >
+              <svg
+                aria-hidden="true"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+              API Docs<span class="sr-only"> (opens in new tab)</span>
+            </a>
+          </div>
+
+          <p class="project-note">
+            A record of published monitoring data, not a water quality service. The live figures are
+            not audited, and nothing here is advice about whether it is safe to swim.
+          </p>
+        </div>
+
         <!-- Coming Soon Divider -->
         <div class="section-divider">
           <span class="divider-line"></span>
           <span class="divider-label">Coming Soon</span>
           <span class="divider-line"></span>
         </div>
-        <div class="upcoming-card">
+        <div class="upcoming-card" id="snippets-lib">
           <div class="upcoming-badge">In Progress</div>
           <h3>Code Snippets Library</h3>
           <p>
@@ -600,6 +765,7 @@
       <div class="container">
         <div class="footer-content">
           <p>Designed & Built by Ed Christie</p>
+          <p class="footer-copyright">&copy; 2026 Ed Christie. All rights reserved.</p>
           <p class="footer-tech">
             Built with HTML, CSS, and vanilla JavaScript - Hosted on Cloudflare
           </p>
@@ -633,6 +799,8 @@
       </div>
     </footer>
 
-    <script src="projects-script.js?v=202607190708"></script>
+    <script src="nav-more.js?v=202609201407"></script>
+    <script src="static/asciinema-player.min.js"></script>
+    <script src="projects-script.js?v=202609201407"></script>
   </body>
 </html>

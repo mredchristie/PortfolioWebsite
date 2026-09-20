@@ -115,6 +115,9 @@
 
 .gallery-item img {
   width: 100%;
+  /* Required: the width/height attributes on each <img> act as presentational
+     hints, so without this the intrinsic pixel height wins and photos stretch. */
+  height: auto;
   display: block;
   transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
