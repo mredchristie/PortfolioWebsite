@@ -719,7 +719,7 @@
 }
 
 /* Portalguard card: the demo recording, played by vendored asciinema-player
-   (static/asciinema-player.{js,css}) against static/portalguard-demo.cast -
+   (assets/vendor/asciinema-player.{js,css}) against assets/vendor/portalguard-demo.cast -
    see projects-script.js for the AsciinemaPlayer.create() call.
 
    The recording is played at its native size (fit: false in the JS, no

@@ -16,7 +16,7 @@ stamp = sys.argv[1]
 for f in glob.glob("*.html"):
     s = open(f).read()
     out = re.sub(
-        r'((?:href|src)="[a-z0-9-]+\.(?:css|js))(\?v=[^"]*)?"',
+        r'((?:href|src)="assets/(?:css|js)/[a-z0-9-]+\.(?:css|js))(\?v=[^"]*)?"',
         rf'\g<1>?v={stamp}"',
         s,
     )
@@ -44,19 +44,15 @@ mc mirror --overwrite \
   --exclude ".prettierrc" \
   --exclude ".prettierignore" \
   --exclude "README.md" \
-  --exclude "refresh-music-snapshot.py" \
-  --exclude "make-og-cards.py" \
-  --exclude "og-card-template.html" \
-  --exclude "profile-ski.png" \
-  --exclude "profile-train.png" \
+  --exclude "tools/*" \
+  --exclude "docs/*" \
+  --exclude "assets/img/profile-ski.png" \
+  --exclude "assets/img/profile-train.png" \
+  --exclude "assets/img/profile.png" \
+  --exclude "assets/img/profile-glasses.png" \
   --exclude "*-card.jpg" \
   --exclude ".theme-backup/*" \
-  --exclude "revert-theme.sh" \
   --exclude ".gitignore" \
-  --exclude "*.excalidraw" \
-  --exclude "WireframeFuture.svg" \
-  --exclude "profile.png" \
-  --exclude "profile-glasses.png" \
   . r2/website
 
 # Purge the Cloudflare cache so everything updates immediately. Needs an API

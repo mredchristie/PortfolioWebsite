@@ -21,32 +21,40 @@ The whole site is static files mirrored to a Cloudflare R2 bucket.
 ```
 .
 ├── index.html / projects.html / infrastructure.html / snippets.html / travel.html / 404.html
-├── styles.css              # shared: theme vars, nav, hero, reveal, interests, contact, footer
-├── projects-styles.css     # project cards + teasers (used by index, projects, infrastructure)
-├── music-styles.css        # #music section on the homepage
-├── snippets-styles.css     # snippets page only
-├── travel-styles.css       # gallery + lightbox
-├── script.js               # homepage: typing animation, nav, theme, scroll reveal
-├── nav-more.js             # shared: click/Escape handling for the nav "More" dropdown
-├── projects-script.js      # projects + infrastructure pages
-├── music-script.js         # #music: stats.fm fetch, listening-clock chart
-├── snippets-script.js      # snippet search/filter/render
-├── travel-script.js        # gallery filtering + lightbox
-├── photos/                 # travel gallery images, by trip
-├── *-card.webp             # 600px renditions used by the homepage interests carousel
-├── *-card.jpg              # their JPEG masters — kept in the repo, not deployed
-├── og-*.png                # Open Graph link-preview cards, one per page
-├── og-card-template.html   # the card design; rasterised by make-og-cards.py
-├── make-og-cards.py        # regenerate the og-*.png cards
-├── deploy.sh               # format, cache-bust, mirror to R2, purge Cloudflare
-├── refresh-music-snapshot.py  # re-bake the #music fallback data
-├── sitemap.xml / robots.txt
-└── .img-backup/            # pre-optimisation originals (gitignored, not deployed)
+├── sitemap.xml / robots.txt / LICENSE
+├── deploy.sh                    # format, cache-bust, mirror to R2, purge Cloudflare
+├── assets/
+│   ├── css/
+│   │   ├── styles.css           # shared: theme vars, nav, hero, reveal, interests, contact, footer
+│   │   ├── projects-styles.css  # project cards + teasers (used by index, projects, infrastructure)
+│   │   ├── music-styles.css     # #music section on the homepage
+│   │   ├── water-styles.css     # water section on the homepage
+│   │   ├── snippets-styles.css  # snippets page only
+│   │   └── travel-styles.css    # gallery + lightbox
+│   ├── js/
+│   │   ├── script.js            # homepage: typing animation, nav, theme, scroll reveal
+│   │   ├── nav-more.js          # shared: click/Escape handling for the nav "More" dropdown
+│   │   ├── projects-script.js   # projects + infrastructure pages
+│   │   ├── music-script.js      # #music: stats.fm fetch, listening-clock chart
+│   │   ├── water-script.js      # water section on the homepage
+│   │   ├── snippets-script.js   # snippet search/filter/render
+│   │   └── travel-script.js     # gallery filtering + lightbox
+│   ├── img/                     # profile shots, interest cards, og-*.png link-preview cards
+│   │                            # (*-card.webp are deployed; the JPEG/PNG masters are not)
+│   ├── photos/                  # travel gallery images, by trip
+│   └── vendor/                  # asciinema player + the PortalGuard demo recording
+├── tools/
+│   ├── make-og-cards.py         # regenerate assets/img/og-*.png
+│   ├── og-card-template.html    # the card design, rasterised by make-og-cards.py
+│   ├── refresh-music-snapshot.py  # re-bake the #music fallback data
+│   └── revert-theme.sh          # legacy: predates the reorganisation, see note in the script
+├── docs/                        # architecture diagram sources (Excalidraw, SVG)
+└── .img-backup/                 # pre-optimisation originals (gitignored, not deployed)
 ```
 
 ## Conventions
 
-**Theming.** Colours come from CSS custom properties on `:root` in `styles.css`. Light mode is
+**Theming.** Colours come from CSS custom properties on `:root` in `assets/css/styles.css`. Light mode is
 applied via `[data-theme='light']` overrides. The theme is read from `localStorage` in an inline
 `<script>` in each `<head>` — before first paint, so there's no flash of the wrong theme.
 
@@ -64,10 +72,10 @@ stats.fm public API (`api.stats.fm/api/v1`) straight from the browser — it sen
 `access-control-allow-origin: *`, so there's no key, proxy or build step. Two endpoints
 supply the headline counts and the hour-of-day buckets behind the listening clock.
 
-Set `STATSFM.user` at the top of `music-script.js`; the fetch is skipped while it reads
+Set `STATSFM.user` at the top of `assets/js/music-script.js`; the fetch is skipped while it reads
 `REPLACE_ME`. The stats.fm privacy toggles for _Streams_ and _Stats_ must be
 public or the API refuses those endpoints. `SNAPSHOT` in the same file is the baked
-fallback used when the fetch fails — regenerate it with `./refresh-music-snapshot.py`. If
+fallback used when the fetch fails — regenerate it with `tools/refresh-music-snapshot.py`. If
 there's no live data _and_ no snapshot the section removes itself rather than render
 placeholder numbers.
 
@@ -89,11 +97,11 @@ reads it out of the DOM, blanks the element and types it back. A `<noscript><sty
 dissolve, and `#music`, which renders from an API — and a slim banner says so.
 
 **Link previews.** Each page points `og:image` at its own 1200×630 card rather than sharing one
-profile photo. `make-og-cards.py` rasterises `og-card-template.html` with headless Chrome, one
+profile photo. `tools/make-og-cards.py` rasterises `tools/og-card-template.html` with headless Chrome, one
 card per entry in its `CARDS` dict. Re-run it after changing a page title:
 
 ```bash
-./make-og-cards.py
+tools/make-og-cards.py
 ```
 
 **Cache busting.** `deploy.sh` rewrites every local `css`/`js` reference with a `?v=<timestamp>`

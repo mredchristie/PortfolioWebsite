@@ -5,7 +5,7 @@ The #music section fetches from stats.fm on every page load; this snapshot is
 only the fallback for when that fetch fails. Re-run occasionally so the fallback
 doesn't drift too far from reality:
 
-    ./refresh-music-snapshot.py
+    tools/refresh-music-snapshot.py
 
 Reads the username and timezone straight out of music-script.js so there's only
 one place to change them.
@@ -17,9 +17,10 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 from datetime import date
 
-SCRIPT = "music-script.js"
+SCRIPT = str(Path(__file__).resolve().parent.parent / "assets" / "js" / "music-script.js")
 BASE = "https://api.stats.fm/api/v1"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
@@ -28,7 +29,7 @@ def read_config(src):
     def field(name):
         m = re.search(rf"^\s*{name}:\s*'([^']*)'", src, re.M)
         if not m:
-            sys.exit(f"could not find `{name}` in {SCRIPT}")
+            sys.exit(f"could not find `{name}` in music-script.js")
         return m.group(1)
 
     return field("user"), field("timeZone")
@@ -53,7 +54,7 @@ def main():
     user, tz = read_config(src)
 
     if user == "REPLACE_ME":
-        sys.exit(f"set `user` in {SCRIPT} to your stats.fm username first")
+        sys.exit(f"set `user` in music-script.js to your stats.fm username first")
 
     stats = get(user, "/streams/stats?range=lifetime")
     dates = get(user, f"/streams/stats/dates?timeZone={urllib.parse.quote(tz)}")
@@ -73,7 +74,7 @@ def main():
     # Match the existing declaration whether it's `null` or a previous object.
     pattern = re.compile(r"^const SNAPSHOT = (?:null|\{.*?\n\});$", re.M | re.S)
     if not pattern.search(src):
-        sys.exit(f"could not find the SNAPSHOT declaration in {SCRIPT}")
+        sys.exit(f"could not find the SNAPSHOT declaration in music-script.js")
     src = pattern.sub(lambda _: f"const SNAPSHOT = {body};", src, count=1)
     open(SCRIPT, "w").write(src)
 

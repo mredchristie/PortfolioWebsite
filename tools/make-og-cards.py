@@ -5,7 +5,7 @@ One 1200x630 PNG per page, in the site's own colours, so a link pasted into
 LinkedIn/Slack/WhatsApp shows what the page actually is instead of a cropped
 profile photo. Re-run after changing a page's title:
 
-    ./make-og-cards.py
+    tools/make-og-cards.py
 
 Needs Google Chrome (headless) and cwebp on PATH.
 """
@@ -18,7 +18,9 @@ import sys
 import tempfile
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-TEMPLATE = pathlib.Path("og-card-template.html")
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+TEMPLATE = ROOT / "tools" / "og-card-template.html"
+OUT_DIR = ROOT / "assets" / "img"
 
 CARDS = {
     "og-home.png": (
@@ -76,13 +78,13 @@ def main():
         src.write_text(page)
         subprocess.run(
             [CHROME, "--headless", "--disable-gpu", "--hide-scrollbars",
-             f"--screenshot={name}", "--window-size=1200,630",
+             f"--screenshot={OUT_DIR / name}", "--window-size=1200,630",
              # Give the webfonts a moment; without this the card can rasterise
              # in the fallback face.
              "--virtual-time-budget=4000", src.as_uri()],
             capture_output=True,
         )
-        kb = pathlib.Path(name).stat().st_size / 1024
+        kb = (OUT_DIR / name).stat().st_size / 1024
         print(f"  {name:<26} {kb:6.0f} KB")
 
     shutil.rmtree(tmp, ignore_errors=True)

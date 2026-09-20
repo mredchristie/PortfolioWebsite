@@ -60,7 +60,7 @@ document.querySelectorAll('.projects-section').forEach((section) => {
 // Portalguard demo: the real terminal recording, not a static transcript
 const pgPlayerEl = document.getElementById('pg-demo-player');
 if (pgPlayerEl && window.AsciinemaPlayer) {
-  AsciinemaPlayer.create('static/portalguard-demo.cast', pgPlayerEl, {
+  AsciinemaPlayer.create('assets/vendor/portalguard-demo.cast', pgPlayerEl, {
     autoPlay: false,
     preload: true,
     loop: true,
