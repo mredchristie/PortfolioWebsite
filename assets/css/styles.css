@@ -301,6 +301,28 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
 }
 
+/* Quiet joke-project badge, deliberately muted next to nav-status-btn so it
+   reads as an aside rather than a serious feature. */
+.nav-fun-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px dashed var(--border-color);
+  color: var(--text-secondary);
+}
+
+.nav-fun-btn:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary, var(--text-secondary));
+}
+
 .theme-toggle {
   background: none;
   border: none;
